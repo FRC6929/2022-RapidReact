@@ -7,11 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,20 +23,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  public final Drivetrain m_drivetrain = new Drivetrain();
-
-  private final Joystick m_Joystick = new Joystick(0);
-
+  private final Shooter m_shooter = new Shooter();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
+  private final Joystick Noahpoumpoum = new Joystick(0);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    m_drivetrain.init_drive();
-    m_drivetrain.setDefaultCommand(
-      new DriveCommand(m_Joystick, m_drivetrain)
-    );
   }
 
   /**
@@ -45,6 +39,12 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    JoystickButton button1 = new JoystickButton(Noahpoumpoum, 1);
+    JoystickButton button2 = new JoystickButton(Noahpoumpoum, 2);
+    button1.whenPressed(new ShooterCommand(m_shooter,0.1));
+    button1.whenReleased(new ShooterCommand(m_shooter,0.0));
+    button2.whenPressed(new ShooterCommand(m_shooter,-0.1));
+    button2.whenReleased(new ShooterCommand(m_shooter,0.0));
   }
 
   /**
@@ -57,3 +57,4 @@ public class RobotContainer {
     return m_autoCommand;
   }
 }
+//noadecoco

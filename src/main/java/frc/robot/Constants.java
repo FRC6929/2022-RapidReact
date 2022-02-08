@@ -13,10 +13,9 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static class ConsDrivetrain{
-        public static final int MoteurGaucheAvant = 1;
-        public static final int MoteurDroitAvant = 2;
-        public static final int MoteurGauche = 3;
-        public static final int MoteurDroit = 4;
-    }
+    public static class ShooterCST {
+        public static final int Moteurshooter = 1;
+        public static final int Moteurshooter2 = 2;
+
+    } 
 }

@@ -14,9 +14,9 @@ import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
   private final CANSparkMax m_drive_fl = new CANSparkMax(Constants.ConsDrivetrain.MoteurGaucheAvant, MotorType.kBrushless);
-  private final CANSparkMax m_drive_fr = new CANSparkMax(Constants.ConsDrivetrain.MoteurDroiteAvant, MotorType.kBrushless);
+  private final CANSparkMax m_drive_fr = new CANSparkMax(Constants.ConsDrivetrain.MoteurDroitAvant, MotorType.kBrushless);
   private final CANSparkMax m_drive_bl = new CANSparkMax(Constants.ConsDrivetrain.MoteurGauche, MotorType.kBrushless);
-  private final CANSparkMax m_drive_br = new CANSparkMax(Constants.ConsDrivetrain.MoteurDroite, MotorType.kBrushless);
+  private final CANSparkMax m_drive_br = new CANSparkMax(Constants.ConsDrivetrain.MoteurDroit, MotorType.kBrushless);
 
   private final MotorControllerGroup m_leftFollower = new MotorControllerGroup(m_drive_fl, m_drive_bl);
   private final MotorControllerGroup m_rightFollower = new MotorControllerGroup(m_drive_fr, m_drive_br);

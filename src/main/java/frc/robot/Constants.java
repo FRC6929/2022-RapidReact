@@ -15,9 +15,9 @@ package frc.robot;
 public final class Constants {
     public static class ConsDrivetrain {
         public static final int MoteurGaucheAvant = 1;
-        public static final int MoteurDroiteAvant = 2;
+        public static final int MoteurDroitAvant = 2;
         public static final int MoteurGauche = 3;
-        public static final int MoteurDroite = 4;
+        public static final int MoteurDroit = 4;
         //sdfsdfsdg
     } 
 }

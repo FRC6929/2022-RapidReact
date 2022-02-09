@@ -25,7 +25,6 @@ public class RobotContainer {
   public final Drivetrain m_drivetrain = new Drivetrain();
 
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();;
   private final Autonome m_autoCommand = new Autonome(m_drivetrain);
 
 

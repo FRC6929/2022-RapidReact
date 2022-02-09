@@ -22,6 +22,7 @@ public class Drivetrain extends SubsystemBase {
   private final MotorControllerGroup m_rightFollower = new MotorControllerGroup(m_drive_fr, m_drive_br);
 
   private final DifferentialDrive m_DifferentialDrive = new DifferentialDrive(m_leftFollower, m_rightFollower);
+  private final DifferentialDrive m_BackWheels = new DifferentialDrive(m_drive_bl, m_drive_br);
 
   /** Creates a new drivetrain. */
   public Drivetrain() {}
@@ -43,6 +44,9 @@ public class Drivetrain extends SubsystemBase {
 
   public void drive(double speed, double rot) {
     m_DifferentialDrive.arcadeDrive(-speed, -rot);
+  }
+  public void back(double speed, double rot) {
+    m_BackWheels.arcadeDrive(-speed, -rot);
   }
 }
 //hack robot

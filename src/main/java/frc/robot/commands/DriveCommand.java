@@ -32,6 +32,7 @@ public class DriveCommand extends CommandBase {
 //    SmartDashboard.putNumber("xSpeed", m_joystick.getY());
 //    SmartDashboard.putNumber("rot", m_joystick.getX());
     m_drivetrain.drive(m_joystick.getX()*0.8, m_joystick.getY());
+    m_drivetrain.back(m_joystick.getZ(), m_joystick.getZ());
   }
 
   // Called once the command ends or is interrupted.

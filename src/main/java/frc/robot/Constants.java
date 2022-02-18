@@ -18,6 +18,10 @@ public final class Constants {
         public static final int MoteurDroitAvant = 2;
         public static final int MoteurGauche = 3;
         public static final int MoteurDroit = 4;
+        }
         //sdfsdfsdg
+    
+    public static class ConsElevator {
+        public static final int ElevatorMotor = 7;
     } 
 }

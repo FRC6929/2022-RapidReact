@@ -9,12 +9,13 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class elevator extends SubsystemBase {
-  /** Creates a new elevator. */
-  public elevator() {}
-private final CANSparkMax m_elevator = new CANSparkMax(Constants.moteur.elevator,MotorType.kBrushless);
+
+public class Elevator extends SubsystemBase {
+  /** Creates a new Elevator. */
+  public Elevator() {}
+private final CANSparkMax m_Elevator = new CANSparkMax(Constants.ConsElevator.ElevatorMotor,MotorType.kBrushless);
 public void ron (double speed){
-  m_elevator.set(speed);
+  m_Elevator.set(speed); 
 }
   @Override
   public void periodic() {

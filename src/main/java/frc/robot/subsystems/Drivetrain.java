@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;//fsdf
+import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.SPI;
 
@@ -65,7 +65,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void drive(double speed, double rot) {
-    m_DifferentialDrive.arcadeDrive(-speed, -rot);
+    m_DifferentialDrive.arcadeDrive(speed, -rot);
   }
   public void back(double speed, double rot) {
     m_BackWheels.arcadeDrive(-speed, -rot);

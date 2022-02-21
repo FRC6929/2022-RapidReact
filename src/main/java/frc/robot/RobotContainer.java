@@ -10,8 +10,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Autonome;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.ShooterIn;
+import frc.robot.commands.ShooterOut;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -26,7 +29,7 @@ public class RobotContainer {
 
   // The robot's subsystems and commands are defined here...
   private final Autonome m_autoCommand = new Autonome(m_drivetrain);
-
+  private final Shooter m_shooter = new Shooter();
 
   private final Joystick m_Joystick = new Joystick(0);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -42,10 +45,14 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    JoystickButton button5 = new JoystickButton(m_Joystick, 5);
+    JoystickButton trigger = new JoystickButton(m_Joystick, 1);
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(
       new DriveCommand(m_Joystick, m_drivetrain)
     );
+    button5.whenHeld(new ShooterIn(m_shooter));
+    trigger.whenHeld(new ShooterOut(m_shooter));
   }
 
   /**

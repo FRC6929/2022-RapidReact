@@ -24,3 +24,5 @@ public class Gyro extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 }
+//rip bozo
+//ce fichier a été transférer dans drivetrain

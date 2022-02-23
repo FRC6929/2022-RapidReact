@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.SPI;
-
 import com.kauailabs.navx.frc.AHRS;
 
 public class Drivetrain extends SubsystemBase {
@@ -27,7 +26,6 @@ public class Drivetrain extends SubsystemBase {
   private final MotorControllerGroup m_rightFollower = new MotorControllerGroup(m_drive_fr, m_drive_br);
 
   private final DifferentialDrive m_DifferentialDrive = new DifferentialDrive(m_leftFollower, m_rightFollower);
-  private final DifferentialDrive m_BackWheels = new DifferentialDrive(m_drive_bl, m_drive_br);
 
   private AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
 
@@ -54,10 +52,21 @@ public class Drivetrain extends SubsystemBase {
     m_drive_fl.restoreFactoryDefaults();
     m_drive_br.restoreFactoryDefaults();
     m_drive_bl.restoreFactoryDefaults();
+
+    m_drive_fr.getEncoder().setPosition(0);
+    m_drive_fl.getEncoder().setPosition(0);
+    m_drive_br.getEncoder().setPosition(0);
+    m_drive_bl.getEncoder().setPosition(0);
+
+    m_rightFollower.setInverted(true);
   }
 
   public double get_encoder(){
-    return m_drive_fl.getEncoder().getPosition();
+    SmartDashboard.putNumber("fl", m_drive_fl.getEncoder().getPosition());
+    SmartDashboard.putNumber("bl", m_drive_bl.getEncoder().getPosition());
+    SmartDashboard.putNumber("fr", m_drive_fr.getEncoder().getPosition());
+    SmartDashboard.putNumber("br", m_drive_br.getEncoder().getPosition());
+    return (m_drive_fl.getEncoder().getPosition()+m_drive_bl.getEncoder().getPosition()+m_drive_fr.getEncoder().getPosition()+m_drive_br.getEncoder().getPosition())/4.0f;
   }
 
   public double get_speed(){
@@ -65,10 +74,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void drive(double speed, double rot) {
-    m_DifferentialDrive.arcadeDrive(-speed, rot);
-  }
-  public void back(double speed, double rot) {
-    m_BackWheels.arcadeDrive(-speed, -rot);
+    m_DifferentialDrive.arcadeDrive(speed, -rot);
   }
 }
 //hack robot

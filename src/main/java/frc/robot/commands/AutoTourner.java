@@ -8,7 +8,7 @@ import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class Autonome extends CommandBase {
+public class AutoTourner extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain m_drivetrain;
 
@@ -17,7 +17,7 @@ public class Autonome extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Autonome(Drivetrain drivetrain) {
+  public AutoTourner(Drivetrain drivetrain) {
     m_drivetrain = drivetrain;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_drivetrain);

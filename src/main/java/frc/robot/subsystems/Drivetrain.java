@@ -65,7 +65,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void drive(double speed, double rot) {
-    m_DifferentialDrive.arcadeDrive(speed, rot);
+    m_DifferentialDrive.arcadeDrive(-speed, rot);
   }
   public void back(double speed, double rot) {
     m_BackWheels.arcadeDrive(-speed, -rot);

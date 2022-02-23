@@ -7,7 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.Autonome;
+import frc.robot.commands.AutoBouger;
+import frc.robot.commands.AutoTourner;
+import frc.robot.commands.AutoBouger;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ShooterIn;
@@ -28,7 +30,9 @@ public class RobotContainer {
   public final Drivetrain m_drivetrain = new Drivetrain();
 
   // The robot's subsystems and commands are defined here...
-  private final Autonome m_autoCommand = new Autonome(m_drivetrain);
+  private final AutoBouger m_autoBouger = new AutoBouger(m_drivetrain);
+  private final AutoTourner m_autoTourner = new AutoTourner(m_drivetrain);
+
   private final Shooter m_shooter = new Shooter();
 
   private final Joystick m_Joystick = new Joystick(0);
@@ -62,7 +66,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return (new AutoBouger(m_drivetrain));
   }
 }
 //noadecoco

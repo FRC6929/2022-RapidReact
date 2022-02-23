@@ -15,7 +15,6 @@ public class Shooter extends SubsystemBase {
   private final CANSparkMax m_shooter1 = new CANSparkMax(Constants.ConsShooter.Moteur1, MotorType.kBrushless);
   private final CANSparkMax m_shooter2 = new CANSparkMax(Constants.ConsShooter.Moteur2, MotorType.kBrushless);
   /** Creates a new Shooter. */
-  private final DifferentialDrive m_ShooterDrive = new DifferentialDrive(m_shooter1, m_shooter2);
 
   public Shooter() {}
 
@@ -23,7 +22,9 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
   }
-  public void shooterdrive(double speed, double rot) {
-    m_ShooterDrive.arcadeDrive(speed, rot);
+  public void shooterdrive(double speed) {
+    m_shooter1.set(speed);
+    m_shooter2.set(-speed);
+
   }
 }

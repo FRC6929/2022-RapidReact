@@ -4,23 +4,25 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class Autonome extends CommandBase {
+public class ShooterOut extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Drivetrain m_drivetrain;
+  private final Shooter m_shooter;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public Autonome(Drivetrain drivetrain) {
-    m_drivetrain = drivetrain;
+  public ShooterOut(Shooter shooter) {
+    m_shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_drivetrain);
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -30,13 +32,14 @@ public class Autonome extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    m_shooter.shooterdrive(.5);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
-
+  public void end(boolean interrupted) {
+    m_shooter.shooterdrive(0);
+  }
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

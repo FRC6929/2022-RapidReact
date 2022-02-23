@@ -20,4 +20,9 @@ public final class Constants {
         public static final int MoteurDroit = 4;
         //sdfsdfsdg
     } 
+    public static class ConsShooter {
+        public static final int Moteur1 = 5;
+        public static final int Moteur2 = 6;
+        //sdfsdfsdg
+    } 
 }

@@ -17,7 +17,7 @@ public final class Constants {
         public static final int MoteurGaucheAvant = 4;
         public static final int MoteurDroitAvant = 3;
         public static final int MoteurGauche = 2;
-        public static final int MoteurDroit = 1;
+        public static final int MoteurDroit = 7;
         //sdfsdfsdg
     } 
     public static class ConsShooter {

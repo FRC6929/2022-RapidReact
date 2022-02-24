@@ -31,7 +31,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   public final Drivetrain m_drivetrain = new Drivetrain();
   public final Elevator m_elevator = new Elevator();
-
+  private final ElevatorCommand m_commandelevator = new ElevatorCommand(m_elevator, m_drivetrain);
   // The robot's subsystems and commands are defined here...
   //private final AutoBouger m_autoBouger = new AutoBouger(m_drivetrain);
   private final AutoTourner m_autoTourner = new AutoTourner(m_drivetrain);
@@ -52,6 +52,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
     JoystickButton button5 = new JoystickButton(m_Joystick, 5);
     JoystickButton trigger = new JoystickButton(m_Joystick, 1);
     JoystickButton button6 = new JoystickButton(m_Joystick, 6);
@@ -61,7 +62,7 @@ public class RobotContainer {
     );
     button5.whenHeld(new ShooterIn(m_shooter));
     trigger.whenHeld(new ShooterOut(m_shooter));
-    button6.whenPressed(new ElevatorCommand(m_elevator, m_drivetrain));
+    button6.whenHeld(m_commandelevator);
   }
 
   /**

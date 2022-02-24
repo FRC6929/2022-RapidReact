@@ -33,6 +33,7 @@ public class Drivetrain extends SubsystemBase {
 
   /** Creates a new drivetrain. */
   public Drivetrain() {
+    m_ahrs.setAngleAdjustment(0.0);
     init_drive();
   }
   

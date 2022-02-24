@@ -25,4 +25,7 @@ public final class Constants {
         public static final int Moteur2 = 6;
         //sdfsdfsdg
     } 
+    public static class elevator {
+        public static final int Moteur1 = 1;
+    }
 }

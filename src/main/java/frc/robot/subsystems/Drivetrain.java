@@ -60,7 +60,9 @@ public class Drivetrain extends SubsystemBase {
 
     m_rightFollower.setInverted(true);
   }
-  
+  public double getAngle() {
+    return m_ahrs.getAngle();
+  }
   public double get_encoder_fl(){
     SmartDashboard.putNumber("fl", -m_drive_fl.getEncoder().getPosition());
     return -m_drive_fl.getEncoder().getPosition();

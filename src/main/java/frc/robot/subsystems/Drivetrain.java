@@ -33,7 +33,6 @@ public class Drivetrain extends SubsystemBase {
 
   /** Creates a new drivetrain. */
   public Drivetrain() {
-    m_ahrs.setAngleAdjustment(0.0);
     init_drive();
   }
   
@@ -42,7 +41,7 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putNumber("motor speed", get_speed());
     SmartDashboard.putNumber("motor encoder", get_encoder());
-    SmartDashboard.putNumber("gyro angle", m_ahrs.getAngle());
+    SmartDashboard.putNumber("gyro angle", m_ahrs.getPitch());
     // This method will be called once per scheduler run
   }
 
@@ -62,7 +61,7 @@ public class Drivetrain extends SubsystemBase {
     m_rightFollower.setInverted(true);
   }
   public double getAngle() {
-    return m_ahrs.getAngle();
+    return m_ahrs.getPitch();
   }
   public double get_encoder_fl(){
     SmartDashboard.putNumber("fl", -m_drive_fl.getEncoder().getPosition());

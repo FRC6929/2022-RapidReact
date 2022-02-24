@@ -37,7 +37,7 @@ public class ElevatorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      if(m_drivetrain.getAngle() < 180) {
+      if(m_drivetrain.getAngle() > 70) {
         SmartDashboard.putNumber("JOE", m_drivetrain.getAngle());
         m_elevator.run(0.2);
       } else {

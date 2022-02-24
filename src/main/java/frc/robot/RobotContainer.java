@@ -4,9 +4,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import frc.robot.commands.AutoBouger;
 import frc.robot.commands.AutoTourner;
 import frc.robot.commands.AutoBouger;
@@ -58,7 +60,13 @@ public class RobotContainer {
     button5.whenHeld(new ShooterIn(m_shooter));
     trigger.whenHeld(new ShooterOut(m_shooter));
   }
+  
+DigitalInput bottomlimitSwitch = new DigitalInput(1);
 
+
+
+ 
+  
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

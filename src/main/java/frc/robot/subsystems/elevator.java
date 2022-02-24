@@ -14,7 +14,7 @@ public class Elevator extends SubsystemBase {
   /** Creates a new Elevator. */
   public Elevator() {}
 private final CANSparkMax m_Elevator = new CANSparkMax(Constants.ConsElevator.ElevatorMotor,MotorType.kBrushless);
-public void ron (double speed){
+public void run (double speed){
   m_Elevator.set(speed); 
 }
   @Override

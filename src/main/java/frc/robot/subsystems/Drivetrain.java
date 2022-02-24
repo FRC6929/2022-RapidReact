@@ -9,8 +9,13 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+
+import edu.wpi.first.wpilibj.SPI;
+
+import com.kauailabs.navx.frc.AHRS;
 
 public class Drivetrain extends SubsystemBase {
   private final CANSparkMax m_drive_fl = new CANSparkMax(Constants.ConsDrivetrain.MoteurGaucheAvant, MotorType.kBrushless);
@@ -23,12 +28,21 @@ public class Drivetrain extends SubsystemBase {
 
   private final DifferentialDrive m_DifferentialDrive = new DifferentialDrive(m_leftFollower, m_rightFollower);
 
+  private AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
+
+  private static final int kGyroPort = 0;
+
   /** Creates a new drivetrain. */
-  public Drivetrain() {}
+  public Drivetrain() {
+    init_drive();
+  }
   
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("motor speed", get_speed());
+    SmartDashboard.putNumber("motor encoder", get_encoder());
+    SmartDashboard.putNumber("gyro angle", m_ahrs.getAngle());
     // This method will be called once per scheduler run
   }
 
@@ -39,10 +53,33 @@ public class Drivetrain extends SubsystemBase {
     m_drive_fl.restoreFactoryDefaults();
     m_drive_br.restoreFactoryDefaults();
     m_drive_bl.restoreFactoryDefaults();
+
+    m_drive_fr.getEncoder().setPosition(0);
+    m_drive_fl.getEncoder().setPosition(0);
+    m_drive_br.getEncoder().setPosition(0);
+    m_drive_bl.getEncoder().setPosition(0);
+
+    m_rightFollower.setInverted(true);
+  }
+
+  public double getAngle() {
+    return  m_ahrs.getAngle();
+  }
+
+  public double get_encoder(){
+    SmartDashboard.putNumber("fl", m_drive_fl.getEncoder().getPosition());
+    SmartDashboard.putNumber("bl", m_drive_bl.getEncoder().getPosition());
+    SmartDashboard.putNumber("fr", m_drive_fr.getEncoder().getPosition());
+    SmartDashboard.putNumber("br", m_drive_br.getEncoder().getPosition());
+    return (m_drive_fl.getEncoder().getPosition()+m_drive_bl.getEncoder().getPosition()+m_drive_fr.getEncoder().getPosition()+m_drive_br.getEncoder().getPosition())/4.0f;
+  }
+
+  public double get_speed(){
+    return m_drive_fl.getEncoder().getVelocity();
   }
 
   public void drive(double speed, double rot) {
-    m_DifferentialDrive.arcadeDrive(-speed, -rot);
+    m_DifferentialDrive.arcadeDrive(speed, -rot);
   }
 }
 //hack robot

@@ -22,6 +22,6 @@ public final class Constants {
         //sdfsdfsdg
     
     public static class ConsElevator {
-        public static final int ElevatorMotor = 7;
+        public static final int ElevatorMotor = 1;
     } 
 }

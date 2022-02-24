@@ -60,13 +60,32 @@ public class Drivetrain extends SubsystemBase {
 
     m_rightFollower.setInverted(true);
   }
+  
+  public double get_encoder_fl(){
+    SmartDashboard.putNumber("fl", -m_drive_fl.getEncoder().getPosition());
+    return -m_drive_fl.getEncoder().getPosition();
+  }
 
+  public double get_encoder_bl(){
+    SmartDashboard.putNumber("bl", -m_drive_bl.getEncoder().getPosition());
+    return -m_drive_bl.getEncoder().getPosition();
+  }
+
+  public double get_encoder_fr(){
+    SmartDashboard.putNumber("fr", m_drive_fr.getEncoder().getPosition());
+    return m_drive_fr.getEncoder().getPosition();
+  }
+
+  public double get_encoder_br(){
+    SmartDashboard.putNumber("br", m_drive_br.getEncoder().getPosition());
+    return m_drive_br.getEncoder().getPosition();
+  }
   public double get_encoder(){
-    SmartDashboard.putNumber("fl", m_drive_fl.getEncoder().getPosition());
-    SmartDashboard.putNumber("bl", m_drive_bl.getEncoder().getPosition());
+    SmartDashboard.putNumber("fl", -m_drive_fl.getEncoder().getPosition());
+    SmartDashboard.putNumber("bl", -m_drive_bl.getEncoder().getPosition());
     SmartDashboard.putNumber("fr", m_drive_fr.getEncoder().getPosition());
     SmartDashboard.putNumber("br", m_drive_br.getEncoder().getPosition());
-    return (m_drive_fl.getEncoder().getPosition()+m_drive_bl.getEncoder().getPosition()+m_drive_fr.getEncoder().getPosition()+m_drive_br.getEncoder().getPosition())/4.0f;
+    return (-m_drive_fl.getEncoder().getPosition()-m_drive_bl.getEncoder().getPosition()+m_drive_fr.getEncoder().getPosition()+m_drive_br.getEncoder().getPosition())/4;
   }
 
   public double get_speed(){

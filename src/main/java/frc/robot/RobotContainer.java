@@ -11,6 +11,7 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.PushArm;
+import frc.robot.commands.PushBall;
 import frc.robot.commands.ShooterIn;
 import frc.robot.commands.ShooterOut;
 import frc.robot.commands.autonome.AutoBouger;
@@ -67,6 +68,7 @@ public class RobotContainer {
     button5.whenHeld(new ShooterIn(m_shooter));
     trigger.whenHeld(new ShooterOut(m_shooter));
     button6.whenHeld(m_commandelevator);
+    new JoystickButton(m_Joystick, 4).whenPressed(new PushBall(m_pneumatics));
     push_btn.whenPressed(new PushArm(m_pneumatics));
   }
 

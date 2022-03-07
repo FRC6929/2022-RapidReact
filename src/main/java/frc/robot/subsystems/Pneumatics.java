@@ -10,27 +10,49 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Pneumatics extends SubsystemBase {
     private Compressor m_compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-    private DoubleSolenoid m_pusher = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+    private DoubleSolenoid m_arm = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+    private DoubleSolenoid m_pusher = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 6, 7);
+    private boolean m_arm_state = false;
     private boolean m_pusher_state = false;
 
     public Pneumatics() {
         m_compressor.enableDigital();
 
+        m_arm.set(Value.kForward);
         m_pusher.set(Value.kForward);
+
+        SmartDashboard.putString("pstate", "forward");
     }
 
     // Fuck you c'est moi qui choisit de faire des noms beaucoup trop long
     // - Maxence
     public void Toggle_Climber(){
-        System.out.println(m_pusher_state);
+        System.out.println(m_arm_state);
 
+        if(m_arm_state)
+        {
+            m_arm.set(Value.kForward);
+            m_arm_state = false;
+        }
+        else
+        {
+            m_arm.set(Value.kReverse);
+            m_arm_state = true;
+        }
+    }
+
+    public void Toggle_Ball_Pusher()
+    {
+        System.out.println("Ball toggle");
         if(m_pusher_state)
         {
+            SmartDashboard.putString("pstate", "forward");
             m_pusher.set(Value.kForward);
             m_pusher_state = false;
         }
         else
         {
+            SmartDashboard.putString("pstate", "reverse");
             m_pusher.set(Value.kReverse);
             m_pusher_state = true;
         }

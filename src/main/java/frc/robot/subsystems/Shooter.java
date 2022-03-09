@@ -29,7 +29,6 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putBoolean("switch", getSwitch());
-
     // This method will be called once per scheduler run
   }
   public void shooterdrive(double speed) {

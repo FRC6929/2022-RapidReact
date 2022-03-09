@@ -25,7 +25,10 @@ public final class Constants {
         public static final int Moteur2 = 6;
         //sdfsdfsdg
     } 
-    public static class elevator {
-        public static final int Moteur1 = 7;
+    public static class ConsElevator {
+        public static final int EMoteur1 = 7;
+        public static final int EMoteur2 = 8;
+        public static final int EMoteur3 = 9;
+        public static final int EMoteur4 = 10;
     }
 }

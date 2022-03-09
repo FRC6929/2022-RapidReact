@@ -4,7 +4,7 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants.elevator;
+import frc.robot.Constants.ConsElevator;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.ExampleSubsystem;

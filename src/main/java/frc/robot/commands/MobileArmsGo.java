@@ -4,27 +4,21 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants.ConsElevator;
-import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
 public class MobileArmsGo extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Elevator m_mobile_arm;
-  private final Drivetrain m_drivetrain;
   private boolean ended = false;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public MobileArmsGo(Elevator mobile_arm, Drivetrain drivetrain) {
+  public MobileArmsGo(Elevator mobile_arm) {
     
     m_mobile_arm = mobile_arm;
-    m_drivetrain = drivetrain;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_mobile_arm);
   }

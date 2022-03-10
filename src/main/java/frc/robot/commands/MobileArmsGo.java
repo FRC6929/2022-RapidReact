@@ -10,11 +10,10 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
 /** An example command that uses an example subsystem. */
-public class ElevatorCommand extends CommandBase {
+public class MobileArmsGo extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Elevator m_elevator;
+  private final Elevator m_mobile_arm;
   private final Drivetrain m_drivetrain;
   private boolean ended = false;
   /**
@@ -22,12 +21,12 @@ public class ElevatorCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ElevatorCommand(Elevator elevator, Drivetrain drivetrain) {
-    SmartDashboard.putNumber("JOE", 0);
-    m_elevator = elevator;
+  public MobileArmsGo(Elevator mobile_arm, Drivetrain drivetrain) {
+    
+    m_mobile_arm = mobile_arm;
     m_drivetrain = drivetrain;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_elevator);
+    addRequirements(m_mobile_arm);
   }
 
   // Called when the command is initially scheduled.
@@ -37,19 +36,14 @@ public class ElevatorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      if(m_drivetrain.getAngle() > 70) {
-        SmartDashboard.putNumber("JOE", m_drivetrain.getAngle());
-        m_elevator.run(0.2);
-      } else {
-        SmartDashboard.putNumber("JOE", m_drivetrain.getAngle());
-        end(true);
+    m_mobile_arm.run(0.2);
       }
-  }
+  
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_elevator.run(0.0);
+    m_mobile_arm.run(0.0);
     ended = true;
   }
 
@@ -60,5 +54,3 @@ public class ElevatorCommand extends CommandBase {
   }
 }
 //6929 Kuyvr é aure 
-//le hacker du dimanche
-//when button69.pressed turn_robot_into(Monkey);

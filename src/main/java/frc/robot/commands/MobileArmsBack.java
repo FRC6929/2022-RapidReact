@@ -10,9 +10,8 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
 /** An example command that uses an example subsystem. */
-public class ElevatorCommand extends CommandBase {
+public class MobileArmsBack extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Elevator m_elevator;
   private final Drivetrain m_drivetrain;
@@ -22,8 +21,8 @@ public class ElevatorCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ElevatorCommand(Elevator elevator, Drivetrain drivetrain) {
-    SmartDashboard.putNumber("JOE", 0);
+  public MobileArmsBack(Elevator elevator, Drivetrain drivetrain) {
+    
     m_elevator = elevator;
     m_drivetrain = drivetrain;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -37,14 +36,9 @@ public class ElevatorCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      if(m_drivetrain.getAngle() > 70) {
-        SmartDashboard.putNumber("JOE", m_drivetrain.getAngle());
-        m_elevator.run(0.2);
-      } else {
-        SmartDashboard.putNumber("JOE", m_drivetrain.getAngle());
-        end(true);
+    m_elevator.run(-0.2);
       }
-  }
+  
 
   // Called once the command ends or is interrupted.
   @Override
@@ -60,5 +54,3 @@ public class ElevatorCommand extends CommandBase {
   }
 }
 //6929 Kuyvr é aure 
-//le hacker du dimanche
-//when button69.pressed turn_robot_into(Monkey);

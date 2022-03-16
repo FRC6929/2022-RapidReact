@@ -41,6 +41,8 @@ public class RobotContainer {
   private final Shooter m_shooter = new Shooter();
 
   private final Joystick m_Joystick = new Joystick(0);
+  private final Joystick m_Copilote = new Joystick(1);
+  private final Joystick m_Copilote2 = new Joystick(2);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -55,19 +57,25 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    JoystickButton button5 = new JoystickButton(m_Joystick, 5);
-    JoystickButton trigger = new JoystickButton(m_Joystick, 1);
+    JoystickButton buttonIn = new JoystickButton(m_Joystick, 5);
+    JoystickButton triggerOut = new JoystickButton(m_Joystick, 1);
     JoystickButton button6 = new JoystickButton(m_Joystick, 6);
-    JoystickButton push_btn = new JoystickButton(m_Joystick, 7);
+    JoystickButton push_arm_btn = new JoystickButton(m_Joystick, 7);
+    JoystickButton push_ball_btn = new JoystickButton(m_Joystick, 7);
+
+    JoystickButton co_button1 = new JoystickButton(m_Copilote, 1);
+
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(
       new DriveCommand(m_Joystick, m_drivetrain)
     );
-    button5.whenHeld(new ShooterIn(m_shooter));
-    trigger.whenHeld(new ShooterOut(m_shooter));
+    buttonIn.whenHeld(new ShooterIn(m_shooter));
+    triggerOut.whenHeld(new ShooterOut(m_shooter));
     button6.whenHeld(m_commandelevator);
-    new JoystickButton(m_Joystick, 4).whenPressed(new PushBall(m_pneumatics));
-    push_btn.whenPressed(new PushArm(m_pneumatics));
+    push_ball_btn.whenPressed(new PushBall(m_pneumatics));
+    push_arm_btn.whenPressed(new PushArm(m_pneumatics));
+
+    co_button1.whenHeld(new ShooterIn(m_shooter)); //niveau 1 shooter ou hold
   }
 
   /**

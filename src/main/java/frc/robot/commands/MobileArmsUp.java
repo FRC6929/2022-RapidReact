@@ -7,7 +7,7 @@ package frc.robot.commands;
 import frc.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
-public class MobileArmsGo extends CommandBase {
+public class MobileArmsUp extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Elevator m_mobile_arm;
   private boolean ended = false;
@@ -16,7 +16,7 @@ public class MobileArmsGo extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public MobileArmsGo(Elevator mobile_arm) {
+  public MobileArmsUp(Elevator mobile_arm) {
     
     m_mobile_arm = mobile_arm;
     // Use addRequirements() here to declare subsystem dependencies.

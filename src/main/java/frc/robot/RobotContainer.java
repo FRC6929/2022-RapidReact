@@ -9,10 +9,14 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ElevatorCommand;
+import frc.robot.commands.MobileArmsDown;
+import frc.robot.commands.MobileArmsUp;
 import frc.robot.commands.PushArm;
 import frc.robot.commands.PushBall;
 import frc.robot.commands.ShooterIn;
 import frc.robot.commands.ShooterOut;
+import frc.robot.commands.StableArmDown;
+import frc.robot.commands.StableArmUp;
 import frc.robot.commands.autonome.AutoBouger;
 import frc.robot.commands.autonome.AutoTourner;
 import frc.robot.commands.autonome.Delay;
@@ -21,6 +25,8 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -43,6 +49,8 @@ public class RobotContainer {
   private final Joystick m_Joystick = new Joystick(0);
   private final Joystick m_Copilote = new Joystick(1);
   private final Joystick m_Copilote2 = new Joystick(2);
+
+  private RobotState m_robotstate;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -63,7 +71,11 @@ public class RobotContainer {
     JoystickButton push_arm_btn = new JoystickButton(m_Joystick, 7);
     JoystickButton push_ball_btn = new JoystickButton(m_Joystick, 7);
 
-    JoystickButton co_button1 = new JoystickButton(m_Copilote, 1);
+    JoystickButton co2_button3 = new JoystickButton(m_Copilote2, 3);
+    JoystickButton co2_button4 = new JoystickButton(m_Copilote2, 4);
+    JoystickButton co2_button1 = new JoystickButton(m_Copilote2, 1);
+    JoystickButton co2_button2 = new JoystickButton(m_Copilote2, 2);
+
 
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(
@@ -75,7 +87,11 @@ public class RobotContainer {
     push_ball_btn.whenPressed(new PushBall(m_pneumatics));
     push_arm_btn.whenPressed(new PushArm(m_pneumatics));
 
-    co_button1.whenHeld(new ShooterIn(m_shooter)); //niveau 1 shooter ou hold
+    co2_button3.whenHeld(new StableArmUp(m_elevator));
+    co2_button4.whenHeld(new StableArmDown(m_elevator));
+    co2_button1.whenHeld(new MobileArmsUp(m_elevator));
+    co2_button2.whenHeld(new MobileArmsDown(m_elevator));
+
   }
 
   /**

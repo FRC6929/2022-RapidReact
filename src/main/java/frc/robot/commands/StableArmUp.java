@@ -31,7 +31,7 @@ public class StableArmUp extends CommandBase {
   @Override
   public void execute() {
     m_stable_arm.run(0.2);
-      }
+    }
   
 
   // Called once the command ends or is interrupted.

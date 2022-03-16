@@ -5,22 +5,27 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 /** An example command that uses an example subsystem. */
-public class LimitSwicth extends CommandBase {
+public class ShooterBack extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ExampleSubsystem m_subsystem;
+  private final Shooter m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public LimitSwicth(ExampleSubsystem subsystem) {
-    m_subsystem = subsystem;
+  public ShooterBack(Shooter shooter) {
+    m_subsystem = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +34,10 @@ public class LimitSwicth extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+   
+  
+  }
 
   // Called once the command ends or is interrupted.
   @Override

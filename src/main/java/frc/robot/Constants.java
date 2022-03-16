@@ -23,8 +23,8 @@ public final class Constants {
     public static class ConsShooter {
         public static final int Moteur1 = 5;
         public static final int Moteur2 = 6;
-        public static final int MoteurGrosSus = 8;
-        public static final int Limiteswitch = 9;
+        public static final int MoteurGrosSus = 11;
+        public static final int Limiteswitch = 12;
         //sdfsdfsdg
     } 
 }

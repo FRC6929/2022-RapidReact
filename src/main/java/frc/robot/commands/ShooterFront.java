@@ -44,8 +44,6 @@ public class ShooterFront extends CommandBase {
   @Override
   public void end(boolean interrupted) {
   m_shooter.ShooterControl(0);
-  
-    
   }
 
   // Returns true when the command should end.

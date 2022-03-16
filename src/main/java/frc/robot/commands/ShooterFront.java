@@ -36,15 +36,14 @@ public class ShooterFront extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   m_shooter.pivotd(0.2);
-    int ok = 0;
+   m_shooter.ShooterControl(0.2);
   }
   
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-  m_shooter.pivotd(0);
+  m_shooter.ShooterControl(0);
   
     
   }

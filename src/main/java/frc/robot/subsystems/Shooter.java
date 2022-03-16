@@ -40,4 +40,9 @@ public class Shooter extends SubsystemBase {
     m_shooter2.set(-speed);
 
   }
+  public void ShooterControl(double speed) {
+    
+    m_pivot.set(speed);
+
+  }
 }

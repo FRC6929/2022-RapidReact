@@ -15,7 +15,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 /** An example command that uses an example subsystem. */
 public class ShooterBack extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Shooter m_subsystem;
+  private final Shooter m_shooter;
 
   /**
    * Creates a new ExampleCommand.
@@ -23,7 +23,7 @@ public class ShooterBack extends CommandBase {
    * @param subsystem The subsystem used by this command.
    */
   public ShooterBack(Shooter shooter) {
-    m_subsystem = shooter;
+    m_shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
   }
@@ -35,9 +35,8 @@ public class ShooterBack extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   
-  
-  }
+    m_shooter.ShooterControl(-0.2);
+   }
 
   // Called once the command ends or is interrupted.
   @Override

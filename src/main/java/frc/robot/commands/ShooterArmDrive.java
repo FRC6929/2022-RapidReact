@@ -4,41 +4,48 @@
 
 package frc.robot.commands;
 
+import frc.robot.RobotState;
 import frc.robot.subsystems.Shooter;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class ShooterOut extends CommandBase {
+public class ShooterArmDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Shooter m_shooter;
-
+  double speed;
+  
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterOut(Shooter shooter) {
+  public ShooterArmDrive(Shooter shooter, double speed) {
     m_shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
-  }
+    this.speed = speed;
+  }  
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.shooterdrive(.5);
+    if(RobotState.mode == true){
+      m_shooter.ShooterArmDrive(speed);
+    }
   }
+  
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooter.shooterdrive(0);
+  m_shooter.ShooterArmDrive(0);
   }
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotState;
 import frc.robot.subsystems.Pneumatics;
 
 // Push deez balls - Maxence(encore)
@@ -20,9 +20,10 @@ public class PushBall extends CommandBase{
 
     @Override
     public void execute(){
-        SmartDashboard.putString("test", "12");
-        m_pneumatics.Toggle_Ball_Pusher();
-        this.m_finished = true;
+        if(RobotState.mode == true){
+            m_pneumatics.Toggle_Ball_Pusher();
+            this.m_finished = true;
+        }
     }
 
     @Override

@@ -4,23 +4,24 @@
 
 package frc.robot.commands;
 
+import frc.robot.RobotState;
 import frc.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
-public class StableArmUp extends CommandBase {
+public class EMobileArmDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Elevator m_stable_arm;
-  private boolean ended = false;
+  private final Elevator m_mobile_arm;
+  double speed;
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public StableArmUp(Elevator stable_arm) {
-    
-    m_stable_arm = stable_arm;
+  public EMobileArmDrive(Elevator stable_arm, double speed) {
+    this.speed = speed;
+    m_mobile_arm = stable_arm;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_stable_arm);
+    addRequirements(m_mobile_arm);
   }
 
   // Called when the command is initially scheduled.
@@ -30,15 +31,16 @@ public class StableArmUp extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_stable_arm.run(0.2);
+    if(RobotState.mode == false && RobotState.bras == false){
+      m_mobile_arm.MobileDrive(speed);
     }
+  }
   
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_stable_arm.run(0.0);
-    ended = true;
+    m_mobile_arm.MobileDrive(0.0);
   }
 
   // Returns true when the command should end.

@@ -7,14 +7,12 @@ package frc.robot;
 /** Add your docs here. */
 public class RobotState {
     
-    public static boolean mod = true; //true = elevateur, false = shooter
-    public static int level = 0; // 0 = lvl 1arr, 1 = lvl 2arr, 2 = lvl 2av, 3 = lvl 1av
-    public static boolean bras = false; //true = stable, false = mobile
+    public static boolean mode = true; //true = shooter, false = elevateur
+    public static boolean bras = true; //true = stable, false = mobile
 
-    public void reset()
+    public void Reset()
     {
-        mod = true;
-        level = 0;
+        mode = true;
         bras = false;
     }
 }

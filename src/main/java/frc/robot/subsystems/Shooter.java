@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import javax.print.CancelablePrintJob;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -16,6 +18,7 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
   private final CANSparkMax m_shooter1 = new CANSparkMax(Constants.ConsShooter.Moteur1, MotorType.kBrushless);
   private final CANSparkMax m_shooter2 = new CANSparkMax(Constants.ConsShooter.Moteur2, MotorType.kBrushless);
+  private final CANSparkMax m_pivot = new CANSparkMax(Constants.ConsShooter.Moteur3, MotorType.kBrushless);
   private final DigitalInput limit = new DigitalInput(1);
 
   /** Creates a new Shooter. */
@@ -38,5 +41,3 @@ public class Shooter extends SubsystemBase {
 
   }
 }
-
-//CLIKCK THHHHIS LIIIIIIIINKQQU IIIIIIIIIIITSSSSSSSSSSSSSSSSSSSS SOOOOOO GGOOD!1!!111!!:https://www.youtube.com/watch?v=dQw4w9WgXcQ

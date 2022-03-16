@@ -24,7 +24,7 @@ public final class Constants {
     public static class ConsShooter {
         public static final int Moteur1 = 5;
         public static final int Moteur2 = 6;
-        public static final int MoteurGrosSus = 11;
+        public static final int Moteur3 = 11;
         //sdfsdfsdg
     } 
     public static class ConsElevator {

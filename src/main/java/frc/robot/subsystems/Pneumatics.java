@@ -7,11 +7,12 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.pneumatic;
 
 public class Pneumatics extends SubsystemBase {
     private Compressor m_compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-    private DoubleSolenoid m_arm = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
-    private DoubleSolenoid m_pusher = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 6, 7);
+    private DoubleSolenoid m_arm = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, pneumatic.arm1.port1, pneumatic.arm1.port2);
+    private DoubleSolenoid m_pusher = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, pneumatic.arm2.port1, pneumatic.arm2.port2);
     private boolean m_arm_state = false;
     private boolean m_pusher_state = false;
 

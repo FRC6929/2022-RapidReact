@@ -60,7 +60,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     JoystickButton push_arm_btn = new JoystickButton(m_Joystick, 7);
-    JoystickButton push_ball_btn = new JoystickButton(m_Joystick, 7);
+    JoystickButton push_ball_btn = new JoystickButton(m_Joystick, 1);
 
     JoystickButton co2_JsUp = new JoystickButton(m_Copilote2, 3);
     JoystickButton co2_JsDown = new JoystickButton(m_Copilote2, 4);

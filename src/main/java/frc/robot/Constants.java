@@ -33,4 +33,14 @@ public final class Constants {
         public static final int EMoteur3 = 9;
         public static final int EMoteur4 = 10;
     }
+    public static class pneumatic {
+        public static class arm1  {
+            public static final int port1 = 0;
+            public static final int port2 = 1;
+        }
+        public static class arm2  {
+            public static final int port1 = 6;
+            public static final int port2 = 7;
+        }
+    }
 }

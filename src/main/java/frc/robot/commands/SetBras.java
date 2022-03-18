@@ -7,19 +7,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotState;
 
-public class SetMode extends CommandBase {
+public class SetBras extends CommandBase {
   /** Creates a new SetMode. */
-  boolean mode;
+  boolean bras;
 
-  public SetMode(boolean mode) {
-     this.mode = mode;
+  public SetBras(boolean bras) {
+     this.bras = bras;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotState.mode = mode;
+    RobotState.bras = bras;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

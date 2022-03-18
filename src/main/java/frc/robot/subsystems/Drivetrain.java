@@ -95,7 +95,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void drive(double speed, double rot) {
-  //  m_DifferentialDrive.arcadeDrive(speed*.8, -rot*.7);
+    m_DifferentialDrive.arcadeDrive(speed*.8, -rot*.7);
   }
 }
 //hack robot

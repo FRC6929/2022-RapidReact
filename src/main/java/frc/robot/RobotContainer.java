@@ -12,6 +12,7 @@ import frc.robot.commands.EMobileArmDrive;
 import frc.robot.commands.EStableArmDrive;
 import frc.robot.commands.PushArm;
 import frc.robot.commands.PushBall;
+import frc.robot.commands.SetBras;
 import frc.robot.commands.SetMode;
 import frc.robot.commands.ShooterArmDrive;
 import frc.robot.commands.ShooterPID;
@@ -59,7 +60,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton push_arm_btn = new JoystickButton(m_Copilote2, 7);
+    JoystickButton push_arm_btn = new JoystickButton(m_Joystick, 2);
     JoystickButton push_ball_btn = new JoystickButton(m_Joystick, 1);
 
     JoystickButton co2_JsUp = new JoystickButton(m_Copilote2, 3);
@@ -69,6 +70,8 @@ public class RobotContainer {
 
     JoystickButton co_ShooterMode = new JoystickButton(m_Copilote, 8);
     JoystickButton co_ElevatorMode = new JoystickButton(m_Copilote, 9);
+    JoystickButton co_FixeMode = new JoystickButton(m_Copilote, 4);
+    JoystickButton co_StableMode = new JoystickButton(m_Copilote, 5);
 
 
     m_drivetrain.init_drive();
@@ -76,6 +79,7 @@ public class RobotContainer {
 
 
     push_ball_btn.whenPressed(new PushBall(m_pneumatics));
+    push_arm_btn.whenPressed(new PushArm(m_pneumatics));
     //push_arm_btn.whenPressed(new PushArm(m_pneumatics));
     
     //Bras mobile et fixe
@@ -94,6 +98,8 @@ public class RobotContainer {
     //Paramétrage des modes
     co_ShooterMode.whenPressed(new SetMode(true));
     co_ElevatorMode.whenPressed(new SetMode(false));
+    co_FixeMode.whenPressed(new SetBras(true));
+    co_StableMode.whenPressed(new SetBras(false));
   }
 
   /**

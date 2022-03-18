@@ -31,9 +31,16 @@ public class EMobileArmDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotState.mode == false && RobotState.bras == false){
+    System.out.println("A");
+    //if(RobotState.mode == false && RobotState.bras == false){
       m_mobile_arm.MobileDrive(speed);
-    }
+
+      System.out.println("C");
+    //  System.out.println("Ca le fait la");
+    //}
+    //else{
+    //  System.out.println("What the hell");
+    //}
   }
   
 

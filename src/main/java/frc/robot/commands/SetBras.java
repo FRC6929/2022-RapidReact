@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotState;
 
@@ -12,7 +13,15 @@ public class SetBras extends CommandBase {
   boolean bras;
 
   public SetBras(boolean bras) {
+    System.out.println("Switch mode");
      this.bras = bras;
+     RobotState.bras = bras;
+     if(RobotState.bras){
+      SmartDashboard.putString("Mode(Bras)", "fixe");
+    }
+    else{
+      SmartDashboard.putString("Mode(Bras)", "mobile");
+    }
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -24,7 +33,9 @@ public class SetBras extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -33,6 +44,6 @@ public class SetBras extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

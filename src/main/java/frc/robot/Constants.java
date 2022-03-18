@@ -14,10 +14,10 @@ package frc.robot;
  */
 public final class Constants {
     public static class ConsDrivetrain {
-        public static final int MoteurGaucheAvant = 4;
-        public static final int MoteurDroitAvant = 3;
-        public static final int MoteurGauche = 2;
-        public static final int MoteurDroit = 1;
+        public static final int MoteurGaucheAvant = 1;
+        public static final int MoteurDroitAvant = 2;
+        public static final int MoteurGauche = 3;
+        public static final int MoteurDroit = 4;
         //sdfsdfsdg
         
     } 
@@ -29,8 +29,8 @@ public final class Constants {
     } 
     public static class ConsElevator {
         public static final int EMoteur1 = 8;
-        public static final int EMoteur2 = 9;
-        public static final int EMoteur3 = 10;
+        public static final int EMoteur2 = 10;
+        public static final int EMoteur3 = 9;
         public static final int EMoteur4 = 11;
     }
     public static class pneumatic {

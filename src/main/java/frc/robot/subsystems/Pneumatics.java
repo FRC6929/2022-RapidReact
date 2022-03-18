@@ -54,7 +54,7 @@ public class Pneumatics extends SubsystemBase {
         else
         {
             SmartDashboard.putString("pstate", "reverse");
-            m_pusher.set(Value.kReverse);
+            m_pusher.set(Value.kForward);
             m_pusher_state = true;
         }
     }

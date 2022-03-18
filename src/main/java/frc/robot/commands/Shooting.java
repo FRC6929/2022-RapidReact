@@ -17,6 +17,7 @@ public class Shooting extends CommandBase {
   boolean lvl;
   private double m_time;
   private long m_start;
+  private boolean m_finished = false;
 
   /**
    * Creates a new ExampleCommand.
@@ -60,13 +61,14 @@ public class Shooting extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_finished = true;
     m_shooter.ShooterRollerDrive(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_finished;
   }
 }
 //6929 Kuyvr é aure 

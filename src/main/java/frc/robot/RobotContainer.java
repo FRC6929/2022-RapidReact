@@ -74,27 +74,33 @@ public class RobotContainer {
     JoystickButton co_FixeMode = new JoystickButton(m_Copilote, 4);
     JoystickButton co_StableMode = new JoystickButton(m_Copilote, 5);
 
+    JoystickButton mobileup = new JoystickButton(m_Joystick, 11);
+    JoystickButton mobiledown = new JoystickButton(m_Joystick, 12);
+
     JoystickButton co_Shoot = new JoystickButton(m_Copilote, 7);
 
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_drivetrain));
 
 
-    push_ball_btn.whenPressed(new PushBall(m_pneumatics));
+    push_ball_btn.whenPressed( (new PushBall(m_pneumatics)).andThen(new Delay(1000)).andThen(new PushBall(m_pneumatics)));
     push_arm_btn.whenPressed(new PushArm(m_pneumatics));
     //push_arm_btn.whenPressed(new PushArm(m_pneumatics));
     
     //Bras mobile et fixe
-    co2_JsUp.whenHeld(new EMobileArmDrive(m_elevator, 0.3));
+    //co2_JsUp.whenHeld(new EMobileArmDrive(m_elevator, 0.3));
     co2_JsUp.whenHeld(new EStableArmDrive(m_elevator, 0.3));
-    co2_JsDown.whenHeld(new EMobileArmDrive(m_elevator, -0.3));
+    //co2_JsDown.whenHeld(new EMobileArmDrive(m_elevator, -0.3));
     co2_JsDown.whenHeld(new EStableArmDrive(m_elevator, -0.3));
 
     //Rouleaux et bras du shooter
-    co2_JsLeft.whenHeld(new ShooterArmDrive(m_shooter, 0.2));
-    co2_JsRight.whenHeld(new ShooterArmDrive(m_shooter, -0.2));
-    co2_JsUp.whenHeld(new ShooterRollerDrive(m_shooter, 0.3));
-    co2_JsDown.whenHeld(new ShooterRollerDrive(m_shooter, -0.3));
+    co2_JsLeft.whenHeld(new ShooterArmDrive(m_shooter, -0.2));
+    co2_JsRight.whenHeld(new ShooterArmDrive(m_shooter, 0.2));
+    co2_JsUp.whenHeld(new ShooterRollerDrive(m_shooter, -0.7));
+    co2_JsDown.whenHeld(new ShooterRollerDrive(m_shooter, 0.4));
+
+    mobileup.whenHeld(new EMobileArmDrive(m_elevator, .2));
+    mobiledown.whenHeld(new EMobileArmDrive(m_elevator, -.2));
     //co_button5.whenPressed(new ShooterPID(m_shooter, 20)); //Lvl 1 av
 
     //Paramétrage des modes

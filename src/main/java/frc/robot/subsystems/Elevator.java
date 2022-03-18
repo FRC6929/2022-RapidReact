@@ -16,8 +16,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class Elevator extends SubsystemBase {
   private final CANSparkMax m_elevator_lf = new CANSparkMax(Constants.ConsElevator.EMoteur1, MotorType.kBrushless);
   private final CANSparkMax m_elevator_lm = new CANSparkMax(Constants.ConsElevator.EMoteur2, MotorType.kBrushless);
-  private final CANSparkMax m_elevator_rm = new CANSparkMax(Constants.ConsElevator.EMoteur3, MotorType.kBrushless);
-  private final CANSparkMax m_elevator_rf = new CANSparkMax(Constants.ConsElevator.EMoteur4, MotorType.kBrushless);
+  private final CANSparkMax m_elevator_rf = new CANSparkMax(Constants.ConsElevator.EMoteur3, MotorType.kBrushless);
+  private final CANSparkMax m_elevator_rm = new CANSparkMax(Constants.ConsElevator.EMoteur4, MotorType.kBrushless);
   /** Creates a new Elevator. */
   public Elevator() {}
   private AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
@@ -25,12 +25,14 @@ public class Elevator extends SubsystemBase {
   private static final int kGyroPort = 0;
   public void StableDrive(Double speed) {
     m_elevator_lf.set(speed);
-    m_elevator_rf.set(speed);
+    m_elevator_rf.set(-speed);
   }
 
   public void MobileDrive(Double speed) {
+    System.out.println("1");
     m_elevator_lm.set(speed);
-    m_elevator_rm.set(speed);
+    m_elevator_rm.set(-speed);
+    System.out.println("2");
   }
 
   public void MobilePID(double dist) {

@@ -24,7 +24,8 @@ public final class Constants {
         public static final int Moteur1 = 5;
         public static final int Moteur2 = 6;
         public static final int MoteurGrosSus = 11;
-        public static final int Limiteswitch = 12;
+        
+        
         //sdfsdfsdg
     } 
 }

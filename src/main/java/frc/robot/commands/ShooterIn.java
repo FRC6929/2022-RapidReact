@@ -33,7 +33,15 @@ public class ShooterIn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.shooterdrive(-.5);
+    if (m_shooter.ShooterLimit.get()) {
+      m_shooter.shooterdrive(0);
+    }
+    else if (m_shooter.ShooterLimit2.get()) {
+      m_shooter.shooterdrive(0);
+    }
+    else {
+      m_shooter.shooterdrive(0.2);
+    }
   }
 
   // Called once the command ends or is interrupted.

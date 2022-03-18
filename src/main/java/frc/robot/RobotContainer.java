@@ -17,6 +17,7 @@ import frc.robot.commands.SetMode;
 import frc.robot.commands.ShooterArmDrive;
 import frc.robot.commands.ShooterPID;
 import frc.robot.commands.ShooterRollerDrive;
+import frc.robot.commands.Shooting;
 import frc.robot.commands.autonome.AutoBouger;
 import frc.robot.commands.autonome.AutoTourner;
 import frc.robot.commands.autonome.Delay;
@@ -60,7 +61,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton push_arm_btn = new JoystickButton(m_Joystick, 2);
+    JoystickButton push_arm_btn = new JoystickButton(m_Joystick, 5);
     JoystickButton push_ball_btn = new JoystickButton(m_Joystick, 1);
 
     JoystickButton co2_JsUp = new JoystickButton(m_Copilote2, 3);
@@ -73,6 +74,7 @@ public class RobotContainer {
     JoystickButton co_FixeMode = new JoystickButton(m_Copilote, 4);
     JoystickButton co_StableMode = new JoystickButton(m_Copilote, 5);
 
+    JoystickButton co_Shoot = new JoystickButton(m_Copilote, 7);
 
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_drivetrain));
@@ -100,6 +102,8 @@ public class RobotContainer {
     co_ElevatorMode.whenPressed(new SetMode(false));
     co_FixeMode.whenPressed(new SetBras(true));
     co_StableMode.whenPressed(new SetBras(false));
+
+    co_Shoot.whenPressed(new Shooting(m_shooter, m_pneumatics, true));
   }
 
   /**

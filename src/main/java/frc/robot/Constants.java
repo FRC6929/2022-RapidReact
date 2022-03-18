@@ -28,10 +28,10 @@ public final class Constants {
         //sdfsdfsdg
     } 
     public static class ConsElevator {
-        public static final int EMoteur1 = 7;
-        public static final int EMoteur2 = 8;
-        public static final int EMoteur3 = 9;
-        public static final int EMoteur4 = 10;
+        public static final int EMoteur1 = 8;
+        public static final int EMoteur2 = 9;
+        public static final int EMoteur3 = 10;
+        public static final int EMoteur4 = 11;
     }
     public static class pneumatic {
         public static class arm1  {

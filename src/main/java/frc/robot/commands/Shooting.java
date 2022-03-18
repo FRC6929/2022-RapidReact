@@ -5,23 +5,27 @@
 package frc.robot.commands;
 
 import frc.robot.RobotState;
+import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class ShooterRollerDrive extends CommandBase {
+public class Shooting extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Shooter m_shooter;
-  double speed;
+  private Pneumatics m_pneumatics;
+  boolean lvl;
+  private double m_time;
+  private long m_start;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterRollerDrive(Shooter shooter, double speed) {
+  public Shooting(Shooter shooter,Pneumatics pneumatics, boolean lvl) {
     m_shooter = shooter;
-    this.speed = speed;
+    this.lvl = lvl;
     
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
@@ -29,13 +33,27 @@ public class ShooterRollerDrive extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_start = System.currentTimeMillis();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotState.mode == true){
-      m_shooter.ShooterRollerDrive(speed);
+    if(lvl){ // true = lvl1
+      m_shooter.ShooterRollerDrive(.5);
+      if(System.currentTimeMillis() - m_start >= 500){
+        m_pneumatics.Toggle_Ball_Pusher();
+        this.end(true);
+      } 
+
+    }
+    else{
+      m_shooter.ShooterRollerDrive(.8);
+      if(System.currentTimeMillis() - m_start >= 500){
+        m_pneumatics.Toggle_Ball_Pusher();
+        this.end(true);
+      } 
     }
   }
 
@@ -51,3 +69,4 @@ public class ShooterRollerDrive extends CommandBase {
     return false;
   }
 }
+//6929 Kuyvr é aure 

@@ -21,7 +21,9 @@ public class Shooter extends SubsystemBase {
   public double get_encoder_shooter(){
     return m_pivot.getEncoder().getPosition();
   }
-  public Shooter() {}
+  public int ShooterAngle;
+    public Shooter() {}
+
  
 
   @Override

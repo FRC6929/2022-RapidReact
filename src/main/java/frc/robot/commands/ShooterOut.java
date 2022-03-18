@@ -32,7 +32,13 @@ public class ShooterOut extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.shooterdrive(.5);
+    if (m_shooter.ShooterAngle == 4){
+      m_shooter.shooterdrive(.25);
+    }
+    else {
+      m_shooter.shooterdrive(.5);
+    }
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -47,3 +53,22 @@ public class ShooterOut extends CommandBase {
   }
 }
 //6929 Kuyvr é aure 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//je suis constipe

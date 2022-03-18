@@ -14,7 +14,6 @@ import frc.robot.commands.AutoTourner;
 import frc.robot.commands.AutoBouger;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.ShooterFront;
 import frc.robot.commands.ShooterIn;
 import frc.robot.commands.ShooterOut;
 import frc.robot.subsystems.Drivetrain;
@@ -52,7 +51,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton button7 = new JoystickButton(m_Joystick, 7);
+    
+    
     JoystickButton button5 = new JoystickButton(m_Joystick, 5);
     JoystickButton trigger = new JoystickButton(m_Joystick, 1);
     m_drivetrain.init_drive();
@@ -61,7 +61,7 @@ public class RobotContainer {
     );
     
     button5.whenHeld(new ShooterIn(m_shooter));
-    button7.whenPressed(new ShooterFront(m_shooter));
+    
     trigger.whenHeld(new ShooterOut(m_shooter));
   
   }

@@ -35,7 +35,7 @@ public class ShooterArmDrive extends CommandBase {
   @Override
   public void execute() {
     if(RobotState.mode == true){
-      m_shooter.ShooterArmDrive(speed);
+      m_shooter.ShooterArmDrive(this.speed);
     }
   }
   

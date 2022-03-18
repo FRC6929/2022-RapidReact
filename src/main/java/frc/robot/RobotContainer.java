@@ -43,8 +43,8 @@ public class RobotContainer {
   private final Shooter m_shooter = new Shooter();
 
   private final Joystick m_Joystick = new Joystick(0);
-  private final Joystick m_Copilote = new Joystick(1);
-  private final Joystick m_Copilote2 = new Joystick(2);
+  private final Joystick m_Copilote = new Joystick(1); // Buttons copilote
+  private final Joystick m_Copilote2 = new Joystick(2); // Joystick copilote
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -59,13 +59,14 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton push_arm_btn = new JoystickButton(m_Joystick, 7);
+    JoystickButton push_arm_btn = new JoystickButton(m_Copilote2, 7);
     JoystickButton push_ball_btn = new JoystickButton(m_Joystick, 1);
 
     JoystickButton co2_JsUp = new JoystickButton(m_Copilote2, 3);
     JoystickButton co2_JsDown = new JoystickButton(m_Copilote2, 4);
     JoystickButton co2_JsLeft = new JoystickButton(m_Copilote2, 1);
     JoystickButton co2_JsRight = new JoystickButton(m_Copilote2, 2);
+
     JoystickButton co_ShooterMode = new JoystickButton(m_Copilote, 8);
     JoystickButton co_ElevatorMode = new JoystickButton(m_Copilote, 9);
 
@@ -75,7 +76,7 @@ public class RobotContainer {
 
 
     push_ball_btn.whenPressed(new PushBall(m_pneumatics));
-    push_arm_btn.whenPressed(new PushArm(m_pneumatics));
+    //push_arm_btn.whenPressed(new PushArm(m_pneumatics));
     
     //Bras mobile et fixe
     co2_JsUp.whenHeld(new EMobileArmDrive(m_elevator, 0.3));

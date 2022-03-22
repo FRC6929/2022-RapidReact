@@ -42,14 +42,21 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     // Fait sure de toujours savoir c quoi le mode du robot
-    SmartDashboard.putBoolean("Mode(manuel)", RobotState.mode);
-
     if(RobotState.mode){
       SmartDashboard.putString("Mode", "Shooter");
     }
     else{
       SmartDashboard.putString("Mode", "Elevateur");
     }
+
+    if(RobotState.bras){
+      SmartDashboard.putString("Bras", "fixe");
+    }
+    else{
+      SmartDashboard.putString("Bras", "mobile");
+    }
+
+    SmartDashboard.putData(CommandScheduler.getInstance());
 
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,

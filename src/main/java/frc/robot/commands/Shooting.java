@@ -15,9 +15,6 @@ public class Shooting extends CommandBase {
   private final Shooter m_shooter;
   private Pneumatics m_pneumatics;
   boolean lvl;
-  private double m_time;
-  private long m_start;
-  private boolean m_finished = false;
 
   /**
    * Creates a new ExampleCommand.
@@ -35,7 +32,6 @@ public class Shooting extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_start = System.currentTimeMillis();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -43,32 +39,25 @@ public class Shooting extends CommandBase {
   public void execute() {
     if(lvl){ // true = lvl1
       m_shooter.ShooterRollerDrive(.5);
-      if(System.currentTimeMillis() - m_start >= 500){
-        m_pneumatics.Toggle_Ball_Pusher();
-        this.end(true);
-      } 
+      m_pneumatics.Toggle_Ball_Pusher();
 
     }
     else{
       m_shooter.ShooterRollerDrive(.8);
-      if(System.currentTimeMillis() - m_start >= 500){
-        m_pneumatics.Toggle_Ball_Pusher();
-        this.end(true);
-      } 
+      m_pneumatics.Toggle_Ball_Pusher();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_finished = true;
     m_shooter.ShooterRollerDrive(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_finished;
+    return true;
   }
 }
 //6929 Kuyvr é aure 

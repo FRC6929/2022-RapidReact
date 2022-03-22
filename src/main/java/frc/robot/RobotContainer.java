@@ -4,12 +4,13 @@
 
 package frc.robot;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveCommand;
-import frc.robot.commands.EMobileArmDrive;
-import frc.robot.commands.EStableArmDrive;
+import frc.robot.commands.EArmDrive;
 import frc.robot.commands.PushArm;
 import frc.robot.commands.PushBall;
 import frc.robot.commands.SetBras;
@@ -26,6 +27,7 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -72,12 +74,12 @@ public class RobotContainer {
     JoystickButton co_ShooterMode = new JoystickButton(m_Copilote, 8);
     JoystickButton co_ElevatorMode = new JoystickButton(m_Copilote, 9);
     JoystickButton co_FixeMode = new JoystickButton(m_Copilote, 4);
-    JoystickButton co_StableMode = new JoystickButton(m_Copilote, 5);
+    JoystickButton co_MobileMode = new JoystickButton(m_Copilote, 5);
 
     JoystickButton mobileup = new JoystickButton(m_Joystick, 11);
     JoystickButton mobiledown = new JoystickButton(m_Joystick, 12);
 
-    JoystickButton co_Shoot = new JoystickButton(m_Copilote, 7);
+    //JoystickButton co_Shoot = new JoystickButton(m_Copilote, 7);
 
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_drivetrain));
@@ -88,28 +90,23 @@ public class RobotContainer {
     //push_arm_btn.whenPressed(new PushArm(m_pneumatics));
     
     //Bras mobile et fixe
-    //co2_JsUp.whenHeld(new EMobileArmDrive(m_elevator, 0.3));
-    co2_JsUp.whenHeld(new EStableArmDrive(m_elevator, 0.3));
-    //co2_JsDown.whenHeld(new EMobileArmDrive(m_elevator, -0.3));
-    co2_JsDown.whenHeld(new EStableArmDrive(m_elevator, -0.3));
+    co2_JsUp.whenHeld(new EArmDrive(m_elevator, 0.3));
+    co2_JsDown.whenHeld(new EArmDrive(m_elevator, -0.3));
 
     //Rouleaux et bras du shooter
     co2_JsLeft.whenHeld(new ShooterArmDrive(m_shooter, -0.2));
     co2_JsRight.whenHeld(new ShooterArmDrive(m_shooter, 0.2));
     co2_JsUp.whenHeld(new ShooterRollerDrive(m_shooter, -0.7));
     co2_JsDown.whenHeld(new ShooterRollerDrive(m_shooter, 0.4));
-
-    mobileup.whenHeld(new EMobileArmDrive(m_elevator, .2));
-    mobiledown.whenHeld(new EMobileArmDrive(m_elevator, -.2));
     //co_button5.whenPressed(new ShooterPID(m_shooter, 20)); //Lvl 1 av
 
     //Paramétrage des modes
     co_ShooterMode.whenPressed(new SetMode(true));
     co_ElevatorMode.whenPressed(new SetMode(false));
     co_FixeMode.whenPressed(new SetBras(true));
-    co_StableMode.whenPressed(new SetBras(false));
+    co_MobileMode.whenPressed(new SetBras(false));
 
-    co_Shoot.whenPressed(new Shooting(m_shooter, m_pneumatics, true));
+    //co_Shoot.whenPressed(new Shooting(m_shooter, m_pneumatics, true));
   }
 
   /**
@@ -122,4 +119,3 @@ public class RobotContainer {
     return (new AutoBouger(m_drivetrain,100)).andThen(new Delay(1000)).andThen((new AutoBouger(m_drivetrain,-100)));
   }
 }
-//noadecoco

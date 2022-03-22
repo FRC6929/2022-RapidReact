@@ -29,10 +29,8 @@ public class Elevator extends SubsystemBase {
   }
 
   public void MobileDrive(Double speed) {
-    System.out.println("1");
     m_elevator_lm.set(speed);
     m_elevator_rm.set(-speed);
-    System.out.println("2");
   }
 
   public void MobilePID(double dist) {

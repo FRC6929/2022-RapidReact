@@ -6,9 +6,10 @@ package frc.robot.commands;
 
 import frc.robot.RobotState;
 import frc.robot.subsystems.Elevator;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
-public class EStableArmDrive extends CommandBase {
+public class EArmDrive extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Elevator m_stable_arm;
   double speed;
@@ -18,7 +19,7 @@ public class EStableArmDrive extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public EStableArmDrive(Elevator stable_arm, double speed) {
+  public EArmDrive(Elevator stable_arm, double speed) {
     this.speed = speed;
     m_stable_arm = stable_arm;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -35,12 +36,17 @@ public class EStableArmDrive extends CommandBase {
     if(RobotState.mode == false && RobotState.bras == true){
       m_stable_arm.StableDrive(speed);
     }
+    else if(RobotState.mode == false && RobotState.bras == false)
+    {
+      m_stable_arm.MobileDrive(speed);
+    }
   } 
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_stable_arm.StableDrive(0.0);
+    m_stable_arm.MobileDrive(0.0);
   }
 
   // Returns true when the command should end.

@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotState;
 
@@ -14,14 +13,7 @@ public class SetBras extends CommandBase {
 
   public SetBras(boolean bras) {
     System.out.println("Switch mode");
-     this.bras = bras;
-     RobotState.bras = bras;
-     if(RobotState.bras){
-      SmartDashboard.putString("Mode(Bras)", "fixe");
-    }
-    else{
-      SmartDashboard.putString("Mode(Bras)", "mobile");
-    }
+    this.bras = bras;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

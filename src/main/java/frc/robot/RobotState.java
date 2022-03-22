@@ -6,18 +6,6 @@ package frc.robot;
 
 /** Add your docs here. */
 public class RobotState {
-    /**
-    * <h3>Robot Mode</h3>
-    * <p> True: Shooter
-    *
-    * False: Elevateur
-    */
     public static boolean mode = true; //true = shooter, false = elevateur
     public static boolean bras = true; //true = stable, false = mobile
-
-    public void Reset()
-    {
-        mode = true;
-        bras = false;
-    }
 }

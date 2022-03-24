@@ -8,9 +8,11 @@ import frc.robot.subsystems.Pneumatics;
 // faq jai inventer ce incroyable nom
 public class PushArm extends CommandBase{
     private Pneumatics m_pneumatics;
-    private boolean m_finished = false;
 
-    public PushArm(Pneumatics p){
+    private boolean m_target = false;
+
+    public PushArm(Pneumatics p, boolean t){
+        m_target = t;
         m_pneumatics = p;
     }
     
@@ -22,14 +24,13 @@ public class PushArm extends CommandBase{
     @Override
     public void execute(){
         if(RobotState.mode == false){
-            m_pneumatics.Toggle_Climber();
-            this.m_finished = true;
+            m_pneumatics.Set_Climber(m_target);
         }
     }
 
     @Override
     public boolean isFinished()
     {
-        return m_finished;
+        return true;
     }
 }

@@ -27,18 +27,16 @@ public class Pneumatics extends SubsystemBase {
 
     // Fuck you c'est moi qui choisit de faire des noms beaucoup trop long
     // - Maxence
-    public void Toggle_Climber(){
-        System.out.println(m_arm_state);
-
-        if(m_arm_state)
+    public void Set_Climber(boolean x){
+        if(x)
         {
             m_arm.set(Value.kForward);
-            m_arm_state = false;
+            m_arm_state = x;
         }
         else
         {
             m_arm.set(Value.kReverse);
-            m_arm_state = true;
+            m_arm_state = x;
         }
     }
 

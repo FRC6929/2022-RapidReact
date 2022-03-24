@@ -26,6 +26,8 @@ public final class Constants {
         public static final int Moteur2 = 6;
         public static final int Moteur3 = 7;
         //sdfsdfsdg
+        public static final int RigthSwitch = 0;
+        public static final int LeftSwitch = 1;
     } 
     public static class ConsElevator {
         public static final int EMoteur1 = 8;

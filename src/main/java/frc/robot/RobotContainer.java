@@ -83,12 +83,13 @@ public class RobotContainer {
 
 
     push_ball_btn.whenPressed( (new PushBall(m_pneumatics)).andThen(new Delay(1000)).andThen(new PushBall(m_pneumatics)));
-    push_arm_btn.whenPressed(new PushArm(m_pneumatics));
     //push_arm_btn.whenPressed(new PushArm(m_pneumatics));
-    
+
     //Bras mobile et fixe
     co2_JsUp.whenHeld(new EArmDrive(m_elevator, 0.5));
     co2_JsDown.whenHeld(new EArmDrive(m_elevator, -0.3));
+    co2_JsLeft.whenHeld(new PushArm(m_pneumatics, false));
+    co2_JsLeft.whenHeld(new PushArm(m_pneumatics, true));
 
     //Rouleaux et bras du shooter
     co2_JsLeft.whenHeld(new ShooterArmDrive(m_shooter, -0.2));
@@ -96,14 +97,14 @@ public class RobotContainer {
     co2_JsUp.whenHeld(new ShooterRollerDrive(m_shooter, -0.5));
     co2_JsDown.whenHeld(new ShooterRollerDrive(m_shooter, 0.2));
 
-    //co_MobileMode_Intake.whenPressed(new ShooterPID(m_shooter, 0));
-    //co_FixeMode_Lvl1.whenPressed(new ShooterPID(m_shooter, 20));
-
     //Paramétrage des modes
     co_ShooterMode.whenPressed(new SetMode(m_camera, true));
     co_ElevatorMode.whenPressed(new SetMode(m_camera, false));
     co_FixeMode_Lvl1.whenPressed(new SetBras(true));
     co_MobileMode_Intake.whenPressed(new SetBras(false));
+
+    // Shooter Positions
+    (new JoystickButton(m_Copilote, 4)).whenPressed(new ShooterPID(m_shooter, 10)); // 1 AV
 
     //co_Shoot.whenPressed(new Shooting(m_shooter, m_pneumatics, true));
   }

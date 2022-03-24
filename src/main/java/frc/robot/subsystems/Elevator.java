@@ -18,6 +18,15 @@ public class Elevator extends SubsystemBase {
   private final CANSparkMax m_elevator_lm = new CANSparkMax(Constants.ConsElevator.EMoteur2, MotorType.kBrushless);
   private final CANSparkMax m_elevator_rf = new CANSparkMax(Constants.ConsElevator.EMoteur3, MotorType.kBrushless);
   private final CANSparkMax m_elevator_rm = new CANSparkMax(Constants.ConsElevator.EMoteur4, MotorType.kBrushless);
+
+  private boolean hold_fixed = false;
+  private boolean hold_mobile = false;
+
+  private int lf_hold = 0;
+  private int lm_hold = 0;
+  private int rf_hold = 0;
+  private int rm_hold = 0;
+
   /** Creates a new Elevator. */
   public Elevator() {}
   private AHRS m_ahrs = new AHRS(SPI.Port.kMXP);

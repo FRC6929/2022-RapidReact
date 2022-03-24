@@ -52,6 +52,7 @@ public class Shooting extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_shooter.ShooterRollerDrive(0);
+    
   }
 
   // Returns true when the command should end.
@@ -60,4 +61,7 @@ public class Shooting extends CommandBase {
     return true;
   }
 }
+
+
+
 //6929 Kuyvr é aure 

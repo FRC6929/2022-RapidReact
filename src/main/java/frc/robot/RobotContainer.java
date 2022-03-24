@@ -22,6 +22,7 @@ import frc.robot.commands.Shooting;
 import frc.robot.commands.autonome.AutoBouger;
 import frc.robot.commands.autonome.AutoTourner;
 import frc.robot.commands.autonome.Delay;
+import frc.robot.subsystems.Camera;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Pneumatics;
@@ -40,6 +41,7 @@ public class RobotContainer {
   public final Pneumatics m_pneumatics = new Pneumatics();
   public final Drivetrain m_drivetrain = new Drivetrain();
   public final Elevator m_elevator = new Elevator();
+  public final Camera m_camera = new Camera();
   // The robot's subsystems and commands are defined here...
   //private final AutoBouger m_autoBouger = new AutoBouger(m_drivetrain);
   private final AutoTourner m_autoTourner = new AutoTourner(m_drivetrain);
@@ -73,13 +75,8 @@ public class RobotContainer {
 
     JoystickButton co_ShooterMode = new JoystickButton(m_Copilote, 8);
     JoystickButton co_ElevatorMode = new JoystickButton(m_Copilote, 9);
-    JoystickButton co_FixeMode = new JoystickButton(m_Copilote, 4);
-    JoystickButton co_MobileMode = new JoystickButton(m_Copilote, 5);
-
-    JoystickButton mobileup = new JoystickButton(m_Joystick, 11);
-    JoystickButton mobiledown = new JoystickButton(m_Joystick, 12);
-
-    //JoystickButton co_Shoot = new JoystickButton(m_Copilote, 7);
+    JoystickButton co_FixeMode_Lvl1 = new JoystickButton(m_Copilote, 4);
+    JoystickButton co_MobileMode_Intake = new JoystickButton(m_Copilote, 5);
 
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_drivetrain));
@@ -90,21 +87,23 @@ public class RobotContainer {
     //push_arm_btn.whenPressed(new PushArm(m_pneumatics));
     
     //Bras mobile et fixe
-    co2_JsUp.whenHeld(new EArmDrive(m_elevator, 0.3));
+    co2_JsUp.whenHeld(new EArmDrive(m_elevator, 0.5));
     co2_JsDown.whenHeld(new EArmDrive(m_elevator, -0.3));
 
     //Rouleaux et bras du shooter
     co2_JsLeft.whenHeld(new ShooterArmDrive(m_shooter, -0.2));
     co2_JsRight.whenHeld(new ShooterArmDrive(m_shooter, 0.2));
-    co2_JsUp.whenHeld(new ShooterRollerDrive(m_shooter, -0.7));
-    co2_JsDown.whenHeld(new ShooterRollerDrive(m_shooter, 0.4));
-    //co_button5.whenPressed(new ShooterPID(m_shooter, 20)); //Lvl 1 av
+    co2_JsUp.whenHeld(new ShooterRollerDrive(m_shooter, -0.5));
+    co2_JsDown.whenHeld(new ShooterRollerDrive(m_shooter, 0.2));
+
+    //co_MobileMode_Intake.whenPressed(new ShooterPID(m_shooter, 0));
+    //co_FixeMode_Lvl1.whenPressed(new ShooterPID(m_shooter, 20));
 
     //Paramétrage des modes
-    co_ShooterMode.whenPressed(new SetMode(true));
-    co_ElevatorMode.whenPressed(new SetMode(false));
-    co_FixeMode.whenPressed(new SetBras(true));
-    co_MobileMode.whenPressed(new SetBras(false));
+    co_ShooterMode.whenPressed(new SetMode(m_camera, true));
+    co_ElevatorMode.whenPressed(new SetMode(m_camera, false));
+    co_FixeMode_Lvl1.whenPressed(new SetBras(true));
+    co_MobileMode_Intake.whenPressed(new SetBras(false));
 
     //co_Shoot.whenPressed(new Shooting(m_shooter, m_pneumatics, true));
   }

@@ -12,8 +12,11 @@ public class SetBras extends CommandBase {
   boolean bras;
 
   public SetBras(boolean bras) {
-    System.out.println("Switch mode");
-    this.bras = bras;
+    //if(RobotState.mode == false)
+    //{
+      System.out.println("Switch mode");
+      this.bras = bras;
+    //}
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

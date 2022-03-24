@@ -6,20 +6,31 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotState;
+import frc.robot.subsystems.Camera;
 
 public class SetMode extends CommandBase {
   /** Creates a new SetMode. */
   boolean mode;
+  Camera m_camera;
 
-  public SetMode(boolean mode) {
+  public SetMode(Camera c, boolean mode) {
+    m_camera = c;
      this.mode = mode;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_camera);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     RobotState.mode = mode;
+
+    if(RobotState.mode){
+      m_camera.look_up();
+    }
+    else{
+      m_camera.look_forward();
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.

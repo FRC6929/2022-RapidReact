@@ -31,9 +31,9 @@ public class Shooter extends SubsystemBase {
     ShooterArmEncoder = m_pivot.getEncoder();
 
     //PID Parameters
-    ShooterArmController.setP(0.04);
-    ShooterArmController.setI(0.000001);
-    ShooterArmController.setD(3);
+    ShooterArmController.setP(0.001);
+    ShooterArmController.setI(0.001);
+    ShooterArmController.setD(0);
   }
 
   public boolean getSwitch(){
@@ -41,7 +41,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void ShooterArmPID(double angle) {
-    double rotation = angle*5*5*5*2/360;
+    double rotation = angle*5*5*5*2*360;
     ShooterArmController.setReference(rotation, CANSparkMax.ControlType.kPosition);
   }
 

@@ -35,7 +35,7 @@ public class Shooter extends SubsystemBase {
     // P est necessaire
     // I est probablement utile
     // D est overkill pour un robot frc selon la documentation
-    ShooterArmController.setP(1.0f/1000f);
+    ShooterArmController.setP(.000001);
     ShooterArmController.setI(0);
     ShooterArmController.setD(0);
   }

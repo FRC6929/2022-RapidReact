@@ -4,29 +4,27 @@
 
 package frc.robot.commands;
 
+import frc.robot.Robot;
 import frc.robot.RobotState;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class Shooting extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final Shooter m_shooter;
+  private Shooter m_shooter;
   private Pneumatics m_pneumatics;
-  boolean lvl;
 
-  /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
-  public Shooting(Shooter shooter,Pneumatics pneumatics, boolean lvl) {
+  private boolean m_finished = false;
+  
+  public Shooting(Shooter shooter,Pneumatics pneumatics) {
     m_shooter = shooter;
-    this.lvl = lvl;
-    
+    m_pneumatics = pneumatics;
+
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
+    addRequirements(shooter,pneumatics);
   }
 
   // Called when the command is initially scheduled.
@@ -37,28 +35,26 @@ public class Shooting extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(lvl){ // true = lvl1
-      m_shooter.ShooterRollerDrive(.5);
-      m_pneumatics.Toggle_Ball_Pusher();
-
+    if(!RobotState.shooter_lvl){
+      m_shooter.ShooterRollerDrive(-0.5f);
     }
     else{
-      m_shooter.ShooterRollerDrive(.8);
-      m_pneumatics.Toggle_Ball_Pusher();
+      m_shooter.ShooterRollerDrive(-0.8f);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_pneumatics.Toggle_Ball_Pusher();
     m_shooter.ShooterRollerDrive(0);
-    
+    m_finished = true;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }
 

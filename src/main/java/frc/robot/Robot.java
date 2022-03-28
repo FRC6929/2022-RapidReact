@@ -32,6 +32,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     CameraServer.startAutomaticCapture();
     m_robotContainer = new RobotContainer();
+
+    // new SparkMax(Constants.ConsShooter.)
   }
 
   /**

@@ -16,6 +16,7 @@ public class Delay extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_finished = false;
     m_start = System.currentTimeMillis();
   }
 

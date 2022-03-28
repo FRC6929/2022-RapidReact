@@ -26,7 +26,7 @@ public class Shooter extends SubsystemBase {
 
   public Shooter() {
     m_pivot.restoreFactoryDefaults();
-    //m_pivot.getEncoder().setPosition(0.0f);
+    m_pivot.getEncoder().setPosition(0.0f);
 
     ShooterArmController = m_pivot.getPIDController();
     ShooterArmEncoder = m_pivot.getEncoder();
@@ -36,7 +36,7 @@ public class Shooter extends SubsystemBase {
     // I est probablement utile
     // D est overkill pour un robot frc selon la documentation
     ShooterArmController.setP(.012);
-    ShooterArmController.setI(0.0000001);
+    ShooterArmController.setI(0.0000005f);
     ShooterArmController.setD(0);
   }
 
@@ -45,10 +45,9 @@ public class Shooter extends SubsystemBase {
   }
 
   public void ShooterArmPID(double angle) {
-    double rotation = (angle*5*5*5*2)/360;
-    //double setpoint = 10;
-    SmartDashboard.putNumber("PID Rotation", rotation);
-    ShooterArmController.setReference(rotation, CANSparkMax.ControlType.kPosition);
+    //double rotation = (angle*5*5*5*2)/360;
+    SmartDashboard.putNumber("PID Rotation", angle);
+    ShooterArmController.setReference(angle, CANSparkMax.ControlType.kPosition);
   }
 
   @Override

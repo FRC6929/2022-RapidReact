@@ -19,6 +19,7 @@ import frc.robot.commands.ShooterArmDrive;
 import frc.robot.commands.ShooterPID;
 import frc.robot.commands.ShooterRollerDrive;
 import frc.robot.commands.Shooting;
+import frc.robot.commands.ToggleBPusher;
 import frc.robot.commands.autonome.AutoBouger;
 import frc.robot.commands.autonome.AutoTourner;
 import frc.robot.commands.autonome.Delay;
@@ -78,6 +79,10 @@ public class RobotContainer {
     JoystickButton co_FixeMode_Lvl1 = new JoystickButton(m_Copilote, 4);
     JoystickButton co_MobileMode_Intake = new JoystickButton(m_Copilote, 5);
 
+    JoystickButton co_Hold_Lvl1_arr = new JoystickButton(m_Copilote, 1);
+
+    JoystickButton co_Shoot = new JoystickButton(m_Copilote, 7);
+
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_drivetrain));
 
@@ -104,9 +109,12 @@ public class RobotContainer {
     co_MobileMode_Intake.whenPressed(new SetBras(false));
 
     // Shooter Positions
-    co_FixeMode_Lvl1.whenPressed(new ShooterPID(m_shooter, -10)); // 1 AV
+    co_FixeMode_Lvl1.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_front,false)); // 1 AV
+    co_Hold_Lvl1_arr.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_back,false));
+    co_MobileMode_Intake.whenPressed(new ShooterPID(m_shooter,Constants.ConsShooter.p_lvl_intake,false));
 
-    //co_Shoot.whenPressed(new Shooting(m_shooter, m_pneumatics, true));
+    co_Shoot.whenHeld(new Shooting(m_shooter, m_pneumatics));
+    co_Shoot.whenReleased(new Delay(1000f).andThen(new ToggleBPusher(m_pneumatics)));
   }
 
   /**

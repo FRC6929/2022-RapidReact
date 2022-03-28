@@ -19,11 +19,12 @@ public class ShooterPID extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterPID(Shooter shooter, double angle) {
+  public ShooterPID(Shooter shooter, double angle, boolean jsp) {
     m_shooter = shooter;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
     this.angle = angle;
+    RobotState.shooter_lvl = jsp;
   }
 
   // Called when the command is initially scheduled.

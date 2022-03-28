@@ -57,10 +57,12 @@ public class AutoBouger extends CommandBase {
     // Devrait arreter immediatement
     m_drivetrain.drive(speed, 0);
 
+    /*
     SmartDashboard.putNumber("temps", temps);
     SmartDashboard.putNumber("elapsed", m_drivetrain.get_encoder() - encodeur_start);
     SmartDashboard.putNumber("dist", Math.abs(dist*0.16666666666666666666666666666667f));
-
+    */
+    
     if(Math.abs(m_drivetrain.get_encoder() - encodeur_start) >= Math.abs(dist*0.16666666666666666666666666666667f)){
       end(true);
     }

@@ -26,7 +26,7 @@ public class Shooter extends SubsystemBase {
 
   public Shooter() {
     m_pivot.restoreFactoryDefaults();
-    m_pivot.getEncoder().setPosition(0.0f);
+    //m_pivot.getEncoder().setPosition(0.0f);
 
     ShooterArmController = m_pivot.getPIDController();
     ShooterArmEncoder = m_pivot.getEncoder();
@@ -35,8 +35,8 @@ public class Shooter extends SubsystemBase {
     // P est necessaire
     // I est probablement utile
     // D est overkill pour un robot frc selon la documentation
-    ShooterArmController.setP(.000001);
-    ShooterArmController.setI(0);
+    ShooterArmController.setP(.012);
+    ShooterArmController.setI(0.0000001);
     ShooterArmController.setD(0);
   }
 
@@ -53,7 +53,7 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("switch", getSwitch());
+    //SmartDashboard.putBoolean("switch", getSwitch());
 
     SmartDashboard.putNumber("Pivot Positon", m_pivot.getEncoder().getPosition());
     //SmartDashboard.putNumber("",);

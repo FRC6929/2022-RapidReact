@@ -92,9 +92,9 @@ public class RobotContainer {
     co2_JsLeft.whenHeld(new PushArm(m_pneumatics, true));
 
     //Rouleaux et bras du shooter
-    co2_JsLeft.whenHeld(new ShooterArmDrive(m_shooter, -0.2));
-    co2_JsRight.whenHeld(new ShooterArmDrive(m_shooter, 0.2));
-    co2_JsUp.whenHeld(new ShooterRollerDrive(m_shooter, -0.5));
+    co2_JsLeft.whenHeld(new ShooterArmDrive(m_shooter, -0.5));
+    co2_JsRight.whenHeld(new ShooterArmDrive(m_shooter, 0.5));
+    co2_JsUp.whenHeld(new ShooterRollerDrive(m_shooter, -0.3));
     co2_JsDown.whenHeld(new ShooterRollerDrive(m_shooter, 0.2));
 
     //Paramétrage des modes
@@ -104,7 +104,7 @@ public class RobotContainer {
     co_MobileMode_Intake.whenPressed(new SetBras(false));
 
     // Shooter Positions
-    (new JoystickButton(m_Copilote, 4)).whenPressed(new ShooterPID(m_shooter, 10)); // 1 AV
+    co_FixeMode_Lvl1.whenPressed(new ShooterPID(m_shooter, -10)); // 1 AV
 
     //co_Shoot.whenPressed(new Shooting(m_shooter, m_pneumatics, true));
   }

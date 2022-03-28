@@ -20,9 +20,9 @@ public class Pneumatics extends SubsystemBase {
         m_compressor.enableDigital();
 
         m_arm.set(Value.kForward);
-        m_pusher.set(Value.kForward);
+        m_pusher.set(Value.kReverse);
 
-        SmartDashboard.putString("pstate", "forward");
+        SmartDashboard.putString("pstate", "backward");
     }
 
     // Fuck you c'est moi qui choisit de faire des noms beaucoup trop long
@@ -59,7 +59,7 @@ public class Pneumatics extends SubsystemBase {
 
     @Override
     public void periodic(){
-        SmartDashboard.putNumber("Pression", m_compressor.getPressure());
+        //SmartDashboard.putNumber("Pression", m_compressor.getPressure());
     }
 }
 

@@ -39,15 +39,14 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("motor speed", get_speed());
-    SmartDashboard.putNumber("motor encoder", get_encoder());
-    SmartDashboard.putNumber("gyro angle", m_ahrs.getPitch());
+    SmartDashboard.putNumber("drivetrain speed", get_speed());
+    SmartDashboard.putNumber("drivetrain encoder", get_encoder());
+    //SmartDashboard.putNumber("gyro angle", m_ahrs.getPitch());
     // This method will be called once per scheduler run
   }
 
   // Gros hack de maxence
-  public void init_drive()
-  {
+  public void init_drive() {
     m_drive_fr.restoreFactoryDefaults();
     m_drive_fl.restoreFactoryDefaults();
     m_drive_br.restoreFactoryDefaults();
@@ -64,29 +63,29 @@ public class Drivetrain extends SubsystemBase {
     return m_ahrs.getPitch();
   }
   public double get_encoder_fl(){
-    SmartDashboard.putNumber("fl", -m_drive_fl.getEncoder().getPosition());
+    //SmartDashboard.putNumber("fl", -m_drive_fl.getEncoder().getPosition());
     return -m_drive_fl.getEncoder().getPosition();
   }
 
   public double get_encoder_bl(){
-    SmartDashboard.putNumber("bl", -m_drive_bl.getEncoder().getPosition());
+    //SmartDashboard.putNumber("bl", -m_drive_bl.getEncoder().getPosition());
     return -m_drive_bl.getEncoder().getPosition();
   }
 
   public double get_encoder_fr(){
-    SmartDashboard.putNumber("fr", m_drive_fr.getEncoder().getPosition());
+    //SmartDashboard.putNumber("fr", m_drive_fr.getEncoder().getPosition());
     return m_drive_fr.getEncoder().getPosition();
   }
 
   public double get_encoder_br(){
-    SmartDashboard.putNumber("br", m_drive_br.getEncoder().getPosition());
+    //SmartDashboard.putNumber("br", m_drive_br.getEncoder().getPosition());
     return m_drive_br.getEncoder().getPosition();
   }
   public double get_encoder(){
-    SmartDashboard.putNumber("fl", -m_drive_fl.getEncoder().getPosition());
-    SmartDashboard.putNumber("bl", -m_drive_bl.getEncoder().getPosition());
-    SmartDashboard.putNumber("fr", m_drive_fr.getEncoder().getPosition());
-    SmartDashboard.putNumber("br", m_drive_br.getEncoder().getPosition());
+    //SmartDashboard.putNumber("fl", -m_drive_fl.getEncoder().getPosition());
+    //SmartDashboard.putNumber("bl", -m_drive_bl.getEncoder().getPosition());
+    //SmartDashboard.putNumber("fr", m_drive_fr.getEncoder().getPosition());
+    //SmartDashboard.putNumber("br", m_drive_br.getEncoder().getPosition());
     return (-m_drive_fl.getEncoder().getPosition()-m_drive_bl.getEncoder().getPosition()+m_drive_fr.getEncoder().getPosition()+m_drive_br.getEncoder().getPosition())/4;
   }
 

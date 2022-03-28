@@ -28,6 +28,10 @@ public final class Constants {
         //sdfsdfsdg
         public static final int RigthSwitch = 0;
         public static final int LeftSwitch = 1;
+
+        public static final int p_lvl1_back = 0;
+        public static final int p_lvl1_front = 24;
+
     } 
     public static class ConsElevator {
         public static final int EMoteur1 = 8;

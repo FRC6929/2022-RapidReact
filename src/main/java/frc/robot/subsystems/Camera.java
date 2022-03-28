@@ -22,8 +22,7 @@ public class Camera extends SubsystemBase {
     
   }
 
-  public void look_forward(){         
-    System.out.println("B");
+  public void look_forward(){
     m_servo.set(.5);
     m_servo.setPosition(0);
   }

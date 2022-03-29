@@ -4,10 +4,12 @@
 
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotState;
-import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
@@ -15,16 +17,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class Shooting extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private Shooter m_shooter;
-  private Pneumatics m_pneumatics;
 
   private boolean m_finished = false;
   
-  public Shooting(Shooter shooter,Pneumatics pneumatics) {
+  public Shooting(Shooter shooter) {
     m_shooter = shooter;
-    m_pneumatics = pneumatics;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter,pneumatics);
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -46,7 +46,7 @@ public class Shooting extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_pneumatics.Toggle_Ball_Pusher();
+    m_shooter.Toggle_Pusher();
     m_shooter.ShooterRollerDrive(0);
     m_finished = true;
   }

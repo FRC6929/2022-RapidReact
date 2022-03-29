@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
-  public final Pneumatics m_pneumatics = new Pneumatics();
   public final Drivetrain m_drivetrain = new Drivetrain();
   public final Elevator m_elevator = new Elevator();
   public final Camera m_camera = new Camera();
@@ -61,14 +60,14 @@ public class RobotContainer {
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_drivetrain));
 
 
-    push_ball_btn.whenPressed( (new PushBall(m_pneumatics)).andThen(new Delay(1000)).andThen(new PushBall(m_pneumatics)));
+    push_ball_btn.whenPressed( (new PushBall(m_shooter)).andThen(new Delay(1000)).andThen(new PushBall(m_shooter)));
     //push_arm_btn.whenPressed(new PushArm(m_pneumatics));
 
     //Bras mobile et fixe
     co2_JsUp.whenHeld(new EArmDrive(m_elevator, 0.5));
     co2_JsDown.whenHeld(new EArmDrive(m_elevator, -0.3));
-    co2_JsLeft.whenHeld(new PushArm(m_pneumatics, false));
-    co2_JsLeft.whenHeld(new PushArm(m_pneumatics, true));
+    co2_JsLeft.whenHeld(new PushArm(m_elevator, false));
+    co2_JsRight.whenHeld(new PushArm(m_elevator, true));
 
     //Rouleaux et bras du shooter
     co2_JsLeft.whenHeld(new ShooterArmDrive(m_shooter, -0.5));
@@ -87,8 +86,8 @@ public class RobotContainer {
     co_Hold_Lvl1_arr.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_back,false));
     co_MobileMode_Intake.whenPressed(new ShooterPID(m_shooter,Constants.ConsShooter.p_lvl_intake,false));
 
-    co_Shoot.whenHeld(new Shooting(m_shooter, m_pneumatics));
-    co_Shoot.whenReleased(new Delay(1000).andThen(new ToggleBPusher(m_pneumatics)));
+    co_Shoot.whenHeld(new Shooting(m_shooter));
+    co_Shoot.whenReleased(new Delay(1000).andThen(new ToggleBPusher(m_shooter)));
 
     // C un peu plus compliquer que ca devrait etre, donc je vais attendre de pouvoir tester
     // avant de faire en sorte que ca prenne les deux boutons

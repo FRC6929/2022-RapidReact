@@ -10,6 +10,9 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -22,6 +25,9 @@ public class Shooter extends SubsystemBase {
   private SparkMaxPIDController ShooterArmController;
   private final DigitalInput limit = new DigitalInput(1);
 
+  private DoubleSolenoid m_pusher = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.pneumatic.arm2.port1, Constants.pneumatic.arm2.port2);
+  private boolean m_pusher_state = false;
+
   /** Creates a new Shooter. */
 
   public Shooter() {
@@ -30,6 +36,8 @@ public class Shooter extends SubsystemBase {
 
     ShooterArmController = m_pivot.getPIDController();
     ShooterArmEncoder = m_pivot.getEncoder();
+
+    m_pusher.set(Value.kReverse);
 
     //PID Parameters
     // P est necessaire
@@ -48,6 +56,19 @@ public class Shooter extends SubsystemBase {
     //double rotation = (angle*5*5*5*2)/360;
     SmartDashboard.putNumber("PID Rotation", angle);
     ShooterArmController.setReference(angle, CANSparkMax.ControlType.kPosition);
+  }
+
+  public void Toggle_Pusher(){
+    if(m_pusher_state){
+      SmartDashboard.putString("pstate", "forward");
+      m_pusher.set(Value.kReverse);
+      m_pusher_state = false;
+    }
+    else{
+      SmartDashboard.putString("pstate", "reverse");
+      m_pusher.set(Value.kForward);
+      m_pusher_state = true;
+    }
   }
 
   @Override

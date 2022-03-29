@@ -2,15 +2,15 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotState;
-import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.Shooter;
 
 // Push deez balls - Maxence(encore)
 public class PushBall extends CommandBase{
-    private Pneumatics m_pneumatics;
+    private Shooter m_shooter;
     private boolean m_finished = false;
 
-    public PushBall(Pneumatics p){
-        m_pneumatics = p;
+    public PushBall(Shooter s){
+        m_shooter = s;
     }
     
     @Override
@@ -21,7 +21,7 @@ public class PushBall extends CommandBase{
     @Override
     public void execute(){
         if(RobotState.mode == true){
-            m_pneumatics.Toggle_Ball_Pusher();
+            m_shooter.Toggle_Pusher();
             this.m_finished = true;
         }
     }

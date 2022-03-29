@@ -6,19 +6,19 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotState;
-import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.Shooter;
 
 public class ToggleBPusher extends CommandBase {
   /** Creates a new SetMode. */
-  Pneumatics m_pneumatics;
+  Shooter m_shooter;
 
   boolean m_finished = false;
   boolean switched = false;
 
-  public ToggleBPusher(Pneumatics p) {
-    m_pneumatics = p;
+  public ToggleBPusher(Shooter p) {
+    m_shooter = p;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_pneumatics);
+    addRequirements(m_shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -34,7 +34,7 @@ public class ToggleBPusher extends CommandBase {
     System.out.println("aumoin ca lexecute une fois");
     if(!switched){
         System.out.println("Auto switch");
-        m_pneumatics.Toggle_Ball_Pusher();
+        m_shooter.Toggle_Pusher();
         switched = true;
     }
     m_finished = true;

@@ -2,7 +2,10 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -20,6 +23,9 @@ public class Elevator extends SubsystemBase {
   private SparkMaxPIDController EArmController_lm;
   private SparkMaxPIDController EArmController_rf;
   private SparkMaxPIDController EArmController_rm;
+
+  private DoubleSolenoid m_arm = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.pneumatic.arm1.port1, Constants.pneumatic.arm1.port2);
+  private boolean m_arm_state = false;
 
   // Valeur d'encodeur que le moteur veut atteindre
   private int lf_target = 0;
@@ -58,6 +64,8 @@ public class Elevator extends SubsystemBase {
 
   public Elevator() {
     reset_encoders();
+
+    m_arm.set(Value.kForward);
   }
 
   public void reset_encoders()
@@ -77,6 +85,32 @@ public class Elevator extends SubsystemBase {
   public void MobileDrive(Double speed) {
     m_elevator_lm.set(-speed);
     m_elevator_rm.set(speed);
+  }
+
+  public void Set_Arm(){
+
+  }
+
+  public void Toggle_Arm(){
+    if(this.m_arm_state){
+      Set_Arm(false);
+    }
+    else{
+      Set_Arm(true);
+    }
+  }
+
+  public void Set_Arm(boolean v){
+    this.m_arm_state = v;
+
+    if(v){
+      System.out.println("v");
+      m_arm.set(Value.kReverse);
+    }
+    else{
+      System.out.println("i");
+      m_arm.set(Value.kForward);
+    }
   }
 
   @Override

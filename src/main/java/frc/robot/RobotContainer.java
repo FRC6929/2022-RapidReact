@@ -53,8 +53,8 @@ public class RobotContainer {
 
     JoystickButton co_Hold_Lvl1_arr = new JoystickButton(m_Copilote, 1);
     // J'ai pas le tableau de controle faq je sait pas c quel button
-    JoystickButton co_Next = new JoystickButton(m_Copilote, 2);
-
+    JoystickButton co_Reset = new JoystickButton(m_Copilote, 2);
+    JoystickButton co_Next = new JoystickButton(m_Copilote, 6);
     JoystickButton co_Shoot = new JoystickButton(m_Copilote, 7);
 
     m_drivetrain.init_drive();
@@ -93,6 +93,7 @@ public class RobotContainer {
     // C un peu plus compliquer que ca devrait etre, donc je vais attendre de pouvoir tester
     // avant de faire en sorte que ca prenne les deux boutons
     co_Next.whenPressed(new NextState(m_elevator));
+    co_Reset.whenPressed(new ResetState(m_elevator));
   }
 
   public Command getAutonomousCommand() {

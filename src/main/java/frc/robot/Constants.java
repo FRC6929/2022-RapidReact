@@ -41,13 +41,13 @@ public final class Constants {
 
         // Difference de valeur d'encodeur entre la
         // position étendu et celle retracté
-        public static final int lf_length = 0;
-        public static final int lm_length = 0;
-        public static final int rf_length = 0;
-        public static final int rm_length = 0;
+        public static final int lf_length = 139;
+        public static final int lm_length = -94;
+        public static final int rf_length = -140;
+        public static final int rm_length = 98;
 
-        public static final float fdeadzone = 1.0f;
-        public static final float mdeadzone = 1.0f;
+        public static final float fdeadzone = 2.5f;
+        public static final float mdeadzone = 2.5f;
 
         public static final float fixe_speed = 0.1f;
         public static final float mobile_speed = 0.1f;

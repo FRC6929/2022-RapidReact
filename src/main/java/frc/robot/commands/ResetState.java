@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotState;
 import frc.robot.subsystems.Elevator;
 
-public class NextState extends CommandBase{
+public class ResetState extends CommandBase{
     private Elevator m_elevator;
 
-    public NextState(Elevator e){
+    public ResetState(Elevator e){
         m_elevator = e;
         addRequirements(e);
     }
@@ -20,8 +20,8 @@ public class NextState extends CommandBase{
     @Override
     public void execute(){
         if(!RobotState.mode){
-            System.out.println("Next elevator state");
-            m_elevator.state_id++;
+            System.out.println("Reset elevator state");
+            m_elevator.state_id = -1;
         }
     }
 

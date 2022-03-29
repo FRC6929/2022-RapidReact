@@ -85,6 +85,11 @@ public class Elevator extends SubsystemBase {
 
     SmartDashboard.putNumber("Etat", state_id);
 
+    SmartDashboard.putNumber("lf_target", lf_target);
+    SmartDashboard.putNumber("lm_target", lm_target);
+    SmartDashboard.putNumber("rf_target", rf_target);
+    SmartDashboard.putNumber("rm_target", rm_target);
+
     SmartDashboard.putNumber("lf", m_elevator_lf.getEncoder().getPosition());
     SmartDashboard.putNumber("lm", m_elevator_lm.getEncoder().getPosition());
     SmartDashboard.putNumber("rf", m_elevator_rf.getEncoder().getPosition());
@@ -93,6 +98,25 @@ public class Elevator extends SubsystemBase {
     //"Machine à état"
     //(pas vrm une vrai machine à état mais vous savez mm pas c quoi faq c correcte)
     // (aussi pas bessoin d'etre appeler chaque tick)
+    if(state_id == -1){
+      reset_encoders();
+      m_elevator_lf.set(0);
+      m_elevator_rf.set(0);
+      m_elevator_lm.set(0);
+      m_elevator_rm.set(0);
+
+      rf_target = 0;
+      lf_target = 0;
+      lm_target = 0;
+      rm_target = 0;
+
+      goto_target = false;
+      trigger_tstate = false;
+      trigger_pstate = false;
+
+      state_id = 0;
+    }
+    
     if(state_id == 1){
       lf_target = Constants.ConsElevator.lf_length;
       rf_target = Constants.ConsElevator.rf_length;
@@ -101,10 +125,12 @@ public class Elevator extends SubsystemBase {
       lm_target = Constants.ConsElevator.lm_length/2;
       rm_target = Constants.ConsElevator.rm_length/2;
 
+      trigger_tstate = true;
       goto_target = true;
     }
     else if(state_id == 2){
-      goto_target = false;
+      trigger_tstate = false;
+      goto_target = true;
     }
     else if(state_id == 3){
       lf_target = 0;
@@ -130,6 +156,7 @@ public class Elevator extends SubsystemBase {
         m_elevator_lf.set(-Constants.ConsElevator.fixe_speed);
       }
       else{
+        m_elevator_lf.set(0);
         verified++;
       }
 
@@ -141,6 +168,7 @@ public class Elevator extends SubsystemBase {
         m_elevator_rf.set(-Constants.ConsElevator.fixe_speed);
       }
       else{
+        m_elevator_rf.set(0);
         verified++;
       }
 
@@ -152,6 +180,7 @@ public class Elevator extends SubsystemBase {
         m_elevator_lm.set(-Constants.ConsElevator.mobile_speed);
       }
       else{
+        m_elevator_lm.set(0);
         verified++;
       }
 
@@ -163,6 +192,7 @@ public class Elevator extends SubsystemBase {
         m_elevator_rm.set(-Constants.ConsElevator.mobile_speed);
       }
       else{
+        m_elevator_rm.set(0);
         verified++;
       }
 

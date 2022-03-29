@@ -18,14 +18,13 @@ public final class Constants {
         public static final int MoteurDroitAvant = 2;
         public static final int MoteurGauche = 3;
         public static final int MoteurDroit = 4;
-        //sdfsdfsdg
         
     } 
     public static class ConsShooter {
         public static final int Moteur1 = 5;
         public static final int Moteur2 = 6;
         public static final int Moteur3 = 7;
-        //sdfsdfsdg
+
         public static final int RigthSwitch = 0;
         public static final int LeftSwitch = 1;
 
@@ -39,6 +38,19 @@ public final class Constants {
         public static final int EMoteur2 = 10;
         public static final int EMoteur3 = 9;
         public static final int EMoteur4 = 11;
+
+        // Difference de valeur d'encodeur entre la
+        // position étendu et celle retracté
+        public static final int lf_length = 0;
+        public static final int lm_length = 0;
+        public static final int rf_length = 0;
+        public static final int rm_length = 0;
+
+        public static final float fdeadzone = 1.0f;
+        public static final float mdeadzone = 1.0f;
+
+        public static final float fixe_speed = 0.1f;
+        public static final float mobile_speed = 0.1f;
     }
     public static class pneumatic {
         public static class arm1  {

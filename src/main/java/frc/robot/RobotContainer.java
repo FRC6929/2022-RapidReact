@@ -9,35 +9,13 @@ import java.util.function.BooleanSupplier;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.DriveCommand;
-import frc.robot.commands.EArmDrive;
-import frc.robot.commands.PushArm;
-import frc.robot.commands.PushBall;
-import frc.robot.commands.SetBras;
-import frc.robot.commands.SetMode;
-import frc.robot.commands.ShooterArmDrive;
-import frc.robot.commands.ShooterPID;
-import frc.robot.commands.ShooterRollerDrive;
-import frc.robot.commands.Shooting;
-import frc.robot.commands.ToggleBPusher;
-import frc.robot.commands.autonome.AutoBouger;
-import frc.robot.commands.autonome.AutoTourner;
-import frc.robot.commands.autonome.Delay;
-import frc.robot.subsystems.Camera;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Pneumatics;
-import frc.robot.subsystems.Shooter;
+import frc.robot.commands.*;
+import frc.robot.commands.autonome.*;
+import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
- */
 public class RobotContainer {
   public final Pneumatics m_pneumatics = new Pneumatics();
   public final Drivetrain m_drivetrain = new Drivetrain();
@@ -59,12 +37,6 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
   private void configureButtonBindings() {
     JoystickButton push_arm_btn = new JoystickButton(m_Joystick, 5);
     JoystickButton push_ball_btn = new JoystickButton(m_Joystick, 1);
@@ -80,6 +52,8 @@ public class RobotContainer {
     JoystickButton co_MobileMode_Intake = new JoystickButton(m_Copilote, 5);
 
     JoystickButton co_Hold_Lvl1_arr = new JoystickButton(m_Copilote, 1);
+    // J'ai pas le tableau de controle faq je sait pas c quel button
+    JoystickButton co_Next = new JoystickButton(m_Copilote, 2);
 
     JoystickButton co_Shoot = new JoystickButton(m_Copilote, 7);
 
@@ -114,16 +88,14 @@ public class RobotContainer {
     co_MobileMode_Intake.whenPressed(new ShooterPID(m_shooter,Constants.ConsShooter.p_lvl_intake,false));
 
     co_Shoot.whenHeld(new Shooting(m_shooter, m_pneumatics));
-    co_Shoot.whenReleased(new Delay(1000f).andThen(new ToggleBPusher(m_pneumatics)));
+    co_Shoot.whenReleased(new Delay(1000).andThen(new ToggleBPusher(m_pneumatics)));
+
+    // C un peu plus compliquer que ca devrait etre, donc je vais attendre de pouvoir tester
+    // avant de faire en sorte que ca prenne les deux boutons
+    co_Next.whenPressed(new NextState(m_elevator)).whenPressed();
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return (new AutoBouger(m_drivetrain,100)).andThen(new Delay(1000)).andThen((new AutoBouger(m_drivetrain,-100)));
+    return (new AutoBouger(m_drivetrain,100)).andThen(new Delay(1000));//.andThen((new AutoBouger(m_drivetrain,-100)));
   }
 }

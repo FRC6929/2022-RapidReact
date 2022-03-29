@@ -35,11 +35,11 @@ public class EArmDrivePID extends CommandBase {
   @Override
   public void execute() {
     if(RobotState.mode == false && RobotState.bras == true) {
-      m_stable_arm.StablePID(dist);
+    //  m_stable_arm.StablePID(dist);
     }
     else if(RobotState.mode == false && RobotState.bras == false)
     {
-      m_stable_arm.MobilePID(dist);
+    //  m_stable_arm.MobilePID(dist);
     }
   } 
 

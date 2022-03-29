@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -25,13 +21,20 @@ public class Elevator extends SubsystemBase {
   private SparkMaxPIDController EArmController_rf;
   private SparkMaxPIDController EArmController_rm;
 
-  private boolean hold_fixed = false;
-  private boolean hold_mobile = false;
+  // Valeur d'encodeur que le moteur veut atteindre
+  private int lf_target = 0;
+  private int rf_target = 0;
+  private int lm_target = 0;
+  private int rm_target = 0;
 
-  private int lf_hold = 0;
-  private int lm_hold = 0;
-  private int rf_hold = 0;
-  private int rm_hold = 0;
+  // Change d'etat quand:
+
+  // Atteint target
+  private boolean trigger_tstate = false;
+  // Change pneumatique
+  private boolean trigger_pstate = false;
+
+  private boolean goto_target = false;
 
   // États
   // 0 : État initiale
@@ -47,18 +50,25 @@ public class Elevator extends SubsystemBase {
   // 10 (auto): Hold
   // 11 : Monter bras fixe
   
-  private int state_id = 0;
+  public int state_id = 0;
 
-  /** Creates a new Elevator. */
-  public Elevator() {
-    //EArmController_lf = m_elevator_lf.getPIDController();
-    //EArmController_lm = m_elevator_lm.getPIDController();
-    //EArmController_rf = m_elevator_rf.getPIDController();
-    //EArmController_rm = m_elevator_rm.getPIDController();
-  }
   private AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
 
   private static final int kGyroPort = 0;
+
+  public Elevator() {
+    reset_encoders();
+  }
+
+  public void reset_encoders()
+  {
+    System.out.println("Reset elevator encoders");
+    m_elevator_lf.getEncoder().setPosition(0.0f);
+    m_elevator_lm.getEncoder().setPosition(0.0f);
+    m_elevator_rf.getEncoder().setPosition(0.0f);
+    m_elevator_rm.getEncoder().setPosition(0.0f);
+  }
+
   public void StableDrive(Double speed) {
     m_elevator_lf.set(speed);
     m_elevator_rf.set(-speed);
@@ -69,37 +79,95 @@ public class Elevator extends SubsystemBase {
     m_elevator_rm.set(speed);
   }
 
-  public void MobilePID(double dist) {
-    //double rotation = (dist*5*5*5*2)/360;
-    //SmartDashboard.putNumber("PID Rotation", rotation);
-    //EArmController_lf.setReference(rotation, CANSparkMax.ControlType.kPosition);
-    //EArmController_lm.setReference(rotation, CANSparkMax.ControlType.kPosition);
-    //EArmController_rf.setReference(rotation, CANSparkMax.ControlType.kPosition);
-    //EArmController_rm.setReference(rotation, CANSparkMax.ControlType.kPosition);
-  }
-
-  public void StablePID(double dist) {
-
-  }
-
-  public void set_hold_fixe(boolean should_hold)
-  {
-    // Mettre valeur encodeur a hold
-  }
-
-  public void set_hold_stable(boolean should_hold){
-
-  } 
-
   @Override
   public void periodic() {
+    // NOTE: Bessoin de manuellement trouver les longeurs de cordes en encodeurs
+
     SmartDashboard.putNumber("Etat", state_id);
 
+    //"Machine à état"
+    //(pas vrm une vrai machine à état mais vous savez mm pas c quoi faq c correcte)
+    // (aussi pas bessoin d'etre appeler chaque tick)
     if(state_id == 1){
+      lf_target = Constants.ConsElevator.lf_length;
+      rf_target = Constants.ConsElevator.rf_length;
 
+      // Pour sauver du temps
+      lm_target = Constants.ConsElevator.lm_length/2;
+      rm_target = Constants.ConsElevator.rm_length/2;
+      
+      goto_target = true;
     }
     else if(state_id == 2){
+      goto_target = false;
+    }
+    else if(state_id == 3){
+      lf_target = 0;
+      rf_target = 0;
+      goto_target = true;
+    }
+    else if(state_id == 4){
+      goto_target = false;
+    }
+    else if(state_id == 5){
 
+    }
+
+    // Mouvements
+    // Goto targets
+    int verified = 0;
+    if(goto_target){
+      // lf 
+      if(m_elevator_lf.getEncoder().getPosition() < lf_target - Constants.ConsElevator.fdeadzone){
+        m_elevator_lf.set(Constants.ConsElevator.fixe_speed);
+      }
+      else if(m_elevator_lf.getEncoder().getPosition() > lf_target + Constants.ConsElevator.fdeadzone){
+        m_elevator_lf.set(-Constants.ConsElevator.fixe_speed);
+      }
+      else{
+        verified++;
+      }
+
+      // rf
+      if(m_elevator_rf.getEncoder().getPosition() < rf_target - Constants.ConsElevator.fdeadzone){
+        m_elevator_rf.set(Constants.ConsElevator.fixe_speed);
+      }
+      else if(m_elevator_rf.getEncoder().getPosition() > rf_target + Constants.ConsElevator.fdeadzone){
+        m_elevator_rf.set(-Constants.ConsElevator.fixe_speed);
+      }
+      else{
+        verified++;
+      }
+
+      // lm
+      if(m_elevator_lm.getEncoder().getPosition() < lm_target - Constants.ConsElevator.mdeadzone){
+        m_elevator_lm.set(Constants.ConsElevator.mobile_speed);
+      }
+      else if(m_elevator_lm.getEncoder().getPosition() > lm_target + Constants.ConsElevator.mdeadzone){
+        m_elevator_lm.set(-Constants.ConsElevator.mobile_speed);
+      }
+      else{
+        verified++;
+      }
+
+      // rm
+      if(m_elevator_rm.getEncoder().getPosition() < rm_target - Constants.ConsElevator.mdeadzone){
+        m_elevator_rm.set(Constants.ConsElevator.mobile_speed);
+      }
+      else if(m_elevator_rm.getEncoder().getPosition() > rm_target + Constants.ConsElevator.mdeadzone){
+        m_elevator_rm.set(-Constants.ConsElevator.mobile_speed);
+      }
+      else{
+        verified++;
+      }
+
+      if(verified == 4 && trigger_tstate){
+        state_id++;
+      }
+      else
+      {
+        System.out.println("Not all verified");
+      }
     }
   }
 }

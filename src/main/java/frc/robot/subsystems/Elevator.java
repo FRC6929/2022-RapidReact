@@ -42,6 +42,8 @@ public class Elevator extends SubsystemBase {
 
   private boolean goto_target = false;
 
+  private boolean p_target = false;
+
   // États
   // 0 : État initiale
   // 1 : Monte bras fixe
@@ -148,6 +150,8 @@ public class Elevator extends SubsystemBase {
       trigger_tstate = false;
       trigger_pstate = false;
 
+      p_target = false;
+
       state_id = 0;
     }
     
@@ -169,13 +173,21 @@ public class Elevator extends SubsystemBase {
     else if(state_id == 3){
       lf_target = 0;
       rf_target = 0;
+      lm_target = Constants.ConsElevator.lm_length;
+      rm_target = Constants.ConsElevator.rm_length;
       goto_target = true;
     }
     else if(state_id == 4){
-      goto_target = false;
+      goto_target = true;
     }
     else if(state_id == 5){
-
+      p_target = true;
+    }
+    else if(state_id == 6){
+      lm_target = 0;
+      rm_target = 0;
+      lf_target = Constants.ConsElevator.lf_length/4;
+      rf_target = Constants.ConsElevator.rf_length/4;
     }
 
     // Mouvements
@@ -183,11 +195,17 @@ public class Elevator extends SubsystemBase {
     int verified = 0;
     if(goto_target){
       // lf 
-      if(m_elevator_lf.getEncoder().getPosition() < lf_target - Constants.ConsElevator.fdeadzone){
+      if(m_elevator_lf.getEncoder().getPosition() < lf_target - Constants.ConsElevator.fdeadzone*2){
         m_elevator_lf.set(Constants.ConsElevator.fixe_speed);
       }
-      else if(m_elevator_lf.getEncoder().getPosition() > lf_target + Constants.ConsElevator.fdeadzone){
+      else if(m_elevator_lf.getEncoder().getPosition() > lf_target + Constants.ConsElevator.fdeadzone*2){
         m_elevator_lf.set(-Constants.ConsElevator.fixe_speed);
+      }
+      else if(m_elevator_lf.getEncoder().getPosition() < lf_target + (Constants.ConsElevator.fdeadzone)){
+        m_elevator_lf.set(Constants.ConsElevator.fixe_speed/3);
+      }
+      else if(m_elevator_lf.getEncoder().getPosition() > lf_target + (Constants.ConsElevator.fdeadzone)){
+        m_elevator_lf.set(-Constants.ConsElevator.fixe_speed/3);
       }
       else{
         m_elevator_lf.set(0);
@@ -195,11 +213,17 @@ public class Elevator extends SubsystemBase {
       }
 
       // rf
-      if(m_elevator_rf.getEncoder().getPosition() < rf_target - Constants.ConsElevator.fdeadzone){
+      if(m_elevator_rf.getEncoder().getPosition() < rf_target - Constants.ConsElevator.fdeadzone*2){
         m_elevator_rf.set(Constants.ConsElevator.fixe_speed);
       }
-      else if(m_elevator_rf.getEncoder().getPosition() > rf_target + Constants.ConsElevator.fdeadzone){
+      else if(m_elevator_rf.getEncoder().getPosition() > rf_target + Constants.ConsElevator.fdeadzone*2){
         m_elevator_rf.set(-Constants.ConsElevator.fixe_speed);
+      }
+      else if(m_elevator_rf.getEncoder().getPosition() < rf_target + (Constants.ConsElevator.fdeadzone)){
+        m_elevator_rf.set(Constants.ConsElevator.fixe_speed/3);
+      }
+      else if(m_elevator_rf.getEncoder().getPosition() > rf_target + (Constants.ConsElevator.fdeadzone)){
+        m_elevator_rf.set(-Constants.ConsElevator.fixe_speed/3);
       }
       else{
         m_elevator_rf.set(0);
@@ -237,6 +261,10 @@ public class Elevator extends SubsystemBase {
       {
         System.out.println("Not all verified");
       }
+    }
+
+    if(p_target != m_arm_state){
+      Set_Arm(p_target);
     }
   }
 }

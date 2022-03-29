@@ -85,6 +85,11 @@ public class Elevator extends SubsystemBase {
 
     SmartDashboard.putNumber("Etat", state_id);
 
+    SmartDashboard.putNumber("lf", m_elevator_lf.getEncoder().getPosition());
+    SmartDashboard.putNumber("lm", m_elevator_lm.getEncoder().getPosition());
+    SmartDashboard.putNumber("rf", m_elevator_rf.getEncoder().getPosition());
+    SmartDashboard.putNumber("rm", m_elevator_rm.getEncoder().getPosition());
+
     //"Machine à état"
     //(pas vrm une vrai machine à état mais vous savez mm pas c quoi faq c correcte)
     // (aussi pas bessoin d'etre appeler chaque tick)
@@ -95,7 +100,7 @@ public class Elevator extends SubsystemBase {
       // Pour sauver du temps
       lm_target = Constants.ConsElevator.lm_length/2;
       rm_target = Constants.ConsElevator.rm_length/2;
-      
+
       goto_target = true;
     }
     else if(state_id == 2){

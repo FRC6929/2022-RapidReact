@@ -92,7 +92,7 @@ public class RobotContainer {
 
     // C un peu plus compliquer que ca devrait etre, donc je vais attendre de pouvoir tester
     // avant de faire en sorte que ca prenne les deux boutons
-    co_Next.whenPressed(new NextState(m_elevator)).whenPressed();
+    co_Next.whenPressed(new NextState(m_elevator));
   }
 
   public Command getAutonomousCommand() {

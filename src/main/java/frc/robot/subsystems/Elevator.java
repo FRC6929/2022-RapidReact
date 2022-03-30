@@ -187,11 +187,39 @@ public class Elevator extends SubsystemBase {
     }
     else if(state_id == 6){
       trigger_tstate = false;
-      lf_target = Constants.ConsElevator.lf_length/3;
-      rf_target = Constants.ConsElevator.rf_length/3;
+      lf_target = Constants.ConsElevator.lf_length/4;
+      rf_target = Constants.ConsElevator.rf_length/4;
     }
     else if(state_id == 7){
       trigger_tstate = false;
+      lf_target = Constants.ConsElevator.lf_length/3;
+      rf_target = Constants.ConsElevator.rf_length/3;
+      lm_target = 0;
+      rm_target = 0;
+    }
+    else if(state_id == 8){
+        p_target = false;
+        //lm_target = Constants.ConsElevator.lm_length/3;
+        //rm_target = Constants.ConsElevator.rm_length/3;
+    }
+    else if(state_id == 9){
+      lf_target = 0;
+      rf_target = 0;
+    }
+    else if(state_id == 10){
+      lm_target = Constants.ConsElevator.lm_length;
+      rm_target = Constants.ConsElevator.rm_length;
+    }
+    else if(state_id == 11){
+      p_target = true;
+    }
+    else if(state_id == 12){
+      lf_target = Constants.ConsElevator.lf_length/4;
+      rf_target = Constants.ConsElevator.rf_length/4;
+    }
+    else if(state_id == 13){
+      lf_target = Constants.ConsElevator.lf_length/3;
+      rf_target = Constants.ConsElevator.rf_length/3;
       lm_target = 0;
       rm_target = 0;
     }
@@ -202,11 +230,11 @@ public class Elevator extends SubsystemBase {
     if(goto_target){
       // lf 
       if(m_elevator_lf.getEncoder().getPosition() < lf_target - Constants.ConsElevator.fdeadzone*2){
-        if(state_id == 6){
-          m_elevator_lf.set(Constants.ConsElevator.fixe_speed*2);
-        }else{
+        //if(state_id == 6){
+        //  m_elevator_lf.set(Constants.ConsElevator.fixe_speed*2);
+        //}else{
           m_elevator_lf.set(Constants.ConsElevator.fixe_speed);
-        }
+        //}
       }
       else if(m_elevator_lf.getEncoder().getPosition() > lf_target + Constants.ConsElevator.fdeadzone*2){
         m_elevator_lf.set(-Constants.ConsElevator.fixe_speed);
@@ -224,11 +252,11 @@ public class Elevator extends SubsystemBase {
 
       // rf
       if(m_elevator_rf.getEncoder().getPosition() < rf_target - Constants.ConsElevator.fdeadzone*2){
-        if(state_id == 6){
-          m_elevator_rf.set(Constants.ConsElevator.fixe_speed*2);
-        }else{
+        //if(state_id == 6){
+        //  m_elevator_rf.set(Constants.ConsElevator.fixe_speed*2);
+        //}else{
           m_elevator_rf.set(Constants.ConsElevator.fixe_speed);
-        }
+        //}
       }
       else if(m_elevator_rf.getEncoder().getPosition() > rf_target + Constants.ConsElevator.fdeadzone*2){
         m_elevator_rf.set(-Constants.ConsElevator.fixe_speed);

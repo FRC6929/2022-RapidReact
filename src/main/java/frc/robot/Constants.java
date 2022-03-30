@@ -49,8 +49,8 @@ public final class Constants {
         public static final float fdeadzone = 1.5f;
         public static final float mdeadzone = 1.5f;
 
-        public static final float fixe_speed = 0.25f;
-        public static final float mobile_speed = 0.25f;
+        public static final float fixe_speed = 0.4f;
+        public static final float mobile_speed = 0.4f;
     }
     public static class pneumatic {
         public static class arm1  {

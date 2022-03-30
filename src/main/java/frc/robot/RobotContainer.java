@@ -96,6 +96,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return (new AutoBouger(m_drivetrain,100)).andThen(new Delay(1000));//.andThen((new AutoBouger(m_drivetrain,-100)));
+    return (new Delay(1000).deadlineWith(new Shooting(m_shooter)).andThen(new Delay(500).deadlineWith(new ToggleBPusher(m_shooter)).andThen(new AutoBouger(m_drivetrain,-200))));
   }
 }

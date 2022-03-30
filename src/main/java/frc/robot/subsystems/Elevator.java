@@ -175,19 +175,25 @@ public class Elevator extends SubsystemBase {
       rf_target = 0;
       lm_target = Constants.ConsElevator.lm_length;
       rm_target = Constants.ConsElevator.rm_length;
+      trigger_tstate = true;
       goto_target = true;
     }
     else if(state_id == 4){
+      trigger_tstate = false;
       goto_target = true;
     }
     else if(state_id == 5){
       p_target = true;
     }
     else if(state_id == 6){
+      trigger_tstate = false;
+      lf_target = Constants.ConsElevator.lf_length/3;
+      rf_target = Constants.ConsElevator.rf_length/3;
+    }
+    else if(state_id == 7){
+      trigger_tstate = false;
       lm_target = 0;
       rm_target = 0;
-      lf_target = Constants.ConsElevator.lf_length/4;
-      rf_target = Constants.ConsElevator.rf_length/4;
     }
 
     // Mouvements
@@ -196,12 +202,16 @@ public class Elevator extends SubsystemBase {
     if(goto_target){
       // lf 
       if(m_elevator_lf.getEncoder().getPosition() < lf_target - Constants.ConsElevator.fdeadzone*2){
-        m_elevator_lf.set(Constants.ConsElevator.fixe_speed);
+        if(state_id == 6){
+          m_elevator_lf.set(Constants.ConsElevator.fixe_speed*2);
+        }else{
+          m_elevator_lf.set(Constants.ConsElevator.fixe_speed);
+        }
       }
       else if(m_elevator_lf.getEncoder().getPosition() > lf_target + Constants.ConsElevator.fdeadzone*2){
         m_elevator_lf.set(-Constants.ConsElevator.fixe_speed);
       }
-      else if(m_elevator_lf.getEncoder().getPosition() < lf_target + (Constants.ConsElevator.fdeadzone)){
+      else if(m_elevator_lf.getEncoder().getPosition() < lf_target - (Constants.ConsElevator.fdeadzone)){
         m_elevator_lf.set(Constants.ConsElevator.fixe_speed/3);
       }
       else if(m_elevator_lf.getEncoder().getPosition() > lf_target + (Constants.ConsElevator.fdeadzone)){
@@ -214,12 +224,16 @@ public class Elevator extends SubsystemBase {
 
       // rf
       if(m_elevator_rf.getEncoder().getPosition() < rf_target - Constants.ConsElevator.fdeadzone*2){
-        m_elevator_rf.set(Constants.ConsElevator.fixe_speed);
+        if(state_id == 6){
+          m_elevator_rf.set(Constants.ConsElevator.fixe_speed*2);
+        }else{
+          m_elevator_rf.set(Constants.ConsElevator.fixe_speed);
+        }
       }
       else if(m_elevator_rf.getEncoder().getPosition() > rf_target + Constants.ConsElevator.fdeadzone*2){
         m_elevator_rf.set(-Constants.ConsElevator.fixe_speed);
       }
-      else if(m_elevator_rf.getEncoder().getPosition() < rf_target + (Constants.ConsElevator.fdeadzone)){
+      else if(m_elevator_rf.getEncoder().getPosition() < rf_target - (Constants.ConsElevator.fdeadzone)){
         m_elevator_rf.set(Constants.ConsElevator.fixe_speed/3);
       }
       else if(m_elevator_rf.getEncoder().getPosition() > rf_target + (Constants.ConsElevator.fdeadzone)){
@@ -231,11 +245,17 @@ public class Elevator extends SubsystemBase {
       }
 
       // lm
-      if(m_elevator_lm.getEncoder().getPosition() < lm_target - Constants.ConsElevator.mdeadzone){
+      if(m_elevator_lm.getEncoder().getPosition() < lm_target - Constants.ConsElevator.mdeadzone*2){
         m_elevator_lm.set(Constants.ConsElevator.mobile_speed);
       }
-      else if(m_elevator_lm.getEncoder().getPosition() > lm_target + Constants.ConsElevator.mdeadzone){
+      else if(m_elevator_lm.getEncoder().getPosition() > lm_target + Constants.ConsElevator.mdeadzone*2){
         m_elevator_lm.set(-Constants.ConsElevator.mobile_speed);
+      }
+      else if(m_elevator_lm.getEncoder().getPosition() < lm_target - (Constants.ConsElevator.mdeadzone)){
+        m_elevator_lm.set(Constants.ConsElevator.mobile_speed/3);
+      }
+      else if(m_elevator_lm.getEncoder().getPosition() > lm_target + (Constants.ConsElevator.mdeadzone)){
+        m_elevator_lm.set(-Constants.ConsElevator.mobile_speed/3);
       }
       else{
         m_elevator_lm.set(0);
@@ -243,11 +263,17 @@ public class Elevator extends SubsystemBase {
       }
 
       // rm
-      if(m_elevator_rm.getEncoder().getPosition() < rm_target - Constants.ConsElevator.mdeadzone){
+      if(m_elevator_rm.getEncoder().getPosition() < rm_target - Constants.ConsElevator.mdeadzone*2){
         m_elevator_rm.set(Constants.ConsElevator.mobile_speed);
       }
-      else if(m_elevator_rm.getEncoder().getPosition() > rm_target + Constants.ConsElevator.mdeadzone){
+      else if(m_elevator_rm.getEncoder().getPosition() > rm_target + Constants.ConsElevator.mdeadzone*2){
         m_elevator_rm.set(-Constants.ConsElevator.mobile_speed);
+      }
+      else if(m_elevator_rm.getEncoder().getPosition() < rm_target - (Constants.ConsElevator.mdeadzone)){
+        m_elevator_rm.set(Constants.ConsElevator.mobile_speed/3);
+      }
+      else if(m_elevator_rm.getEncoder().getPosition() > rm_target + (Constants.ConsElevator.mdeadzone)){
+        m_elevator_rm.set(-Constants.ConsElevator.mobile_speed/3);
       }
       else{
         m_elevator_rm.set(0);
@@ -259,7 +285,7 @@ public class Elevator extends SubsystemBase {
       }
       else
       {
-        System.out.println("Not all verified");
+        SmartDashboard.putNumber("Verified", verified);
       }
     }
 

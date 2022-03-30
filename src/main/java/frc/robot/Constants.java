@@ -46,8 +46,8 @@ public final class Constants {
         public static final int rf_length = -132;
         public static final int rm_length = 95;
 
-        public static final float fdeadzone = 2.5f;
-        public static final float mdeadzone = 2.5f;
+        public static final float fdeadzone = 1.5f;
+        public static final float mdeadzone = 1.5f;
 
         public static final float fixe_speed = 0.25f;
         public static final float mobile_speed = 0.25f;

@@ -89,6 +89,13 @@ public class Drivetrain extends SubsystemBase {
     return (-m_drive_fl.getEncoder().getPosition()-m_drive_bl.getEncoder().getPosition()+m_drive_fr.getEncoder().getPosition()+m_drive_br.getEncoder().getPosition())/4;
   }
 
+  public void reset_encoders(){
+    m_drive_fr.getEncoder().setPosition(0);
+    m_drive_fl.getEncoder().setPosition(0);
+    m_drive_br.getEncoder().setPosition(0);
+    m_drive_bl.getEncoder().setPosition(0);
+  }
+
   public double get_speed(){
     return m_drive_fl.getEncoder().getVelocity();
   }

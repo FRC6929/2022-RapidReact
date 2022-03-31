@@ -4,14 +4,17 @@
 
 package frc.robot.commands;
 
+import frc.robot.Robot;
 import frc.robot.RobotState;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class ShooterPID extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Shooter m_shooter;
+  private boolean m_jsp;
   double angle;
 
   /**
@@ -21,15 +24,18 @@ public class ShooterPID extends CommandBase {
    */
   public ShooterPID(Shooter shooter, double angle, boolean jsp) {
     m_shooter = shooter;
+    m_jsp = jsp;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
     this.angle = angle;
-    RobotState.shooter_lvl = jsp;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotState.shooter_lvl = m_jsp;
+    SmartDashboard.putBoolean("shooter_lvl", RobotState.shooter_lvl);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

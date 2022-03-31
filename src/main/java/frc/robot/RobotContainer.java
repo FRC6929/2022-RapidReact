@@ -37,8 +37,6 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    JoystickButton push_arm_btn = new JoystickButton(m_Joystick, 5);
-    JoystickButton push_ball_btn = new JoystickButton(m_Joystick, 1);
 
     JoystickButton co2_JsUp = new JoystickButton(m_Copilote2, 3);
     JoystickButton co2_JsDown = new JoystickButton(m_Copilote2, 4);
@@ -47,6 +45,7 @@ public class RobotContainer {
 
     JoystickButton co_ShooterMode = new JoystickButton(m_Copilote, 8);
     JoystickButton co_ElevatorMode = new JoystickButton(m_Copilote, 9);
+    JoystickButton co_Back_Lvl2 = new JoystickButton(m_Copilote,3);
     JoystickButton co_FixeMode_Lvl1 = new JoystickButton(m_Copilote, 4);
     JoystickButton co_MobileMode_Intake = new JoystickButton(m_Copilote, 5);
 
@@ -56,11 +55,12 @@ public class RobotContainer {
     JoystickButton co_Next = new JoystickButton(m_Copilote, 6);
     JoystickButton co_Shoot = new JoystickButton(m_Copilote, 7);
 
+    JoystickButton jo_resetshooter = new JoystickButton(m_Joystick, 7);
+
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_drivetrain));
 
 
-    push_ball_btn.whenPressed( (new PushBall(m_shooter)).andThen(new Delay(1000)).andThen(new PushBall(m_shooter)));
     //push_arm_btn.whenPressed(new PushArm(m_pneumatics));
 
     //Bras mobile et fixe
@@ -84,7 +84,9 @@ public class RobotContainer {
     // Shooter Positions
     co_FixeMode_Lvl1.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_front,false)); // 1 AV
     co_Hold_Lvl1_arr.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_back,false));
+    co_Back_Lvl2.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl2_front, true));
     co_MobileMode_Intake.whenPressed(new ShooterPID(m_shooter,Constants.ConsShooter.p_lvl_intake,false));
+    co_Reset.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_back,true));
 
     co_Shoot.whenHeld(new Shooting(m_shooter));
     co_Shoot.whenReleased(new Delay(1000).andThen(new ToggleBPusher(m_shooter)));
@@ -93,9 +95,14 @@ public class RobotContainer {
     // avant de faire en sorte que ca prenne les deux boutons
     co_Next.whenPressed(new NextState(m_elevator));
     co_Reset.whenPressed(new ResetState(m_elevator));
+
+    //joystick reset
+    jo_resetshooter.whenPressed(new PusherReset(m_shooter));
   }
 
   public Command getAutonomousCommand() {
-    return (new Delay(1000).deadlineWith(new Shooting(m_shooter)).andThen(new Delay(500).deadlineWith(new ToggleBPusher(m_shooter)).andThen(new AutoBouger(m_drivetrain,-200))));
+    RobotState.shooter_lvl = false;
+    m_drivetrain.reset_encoders();
+    return (new Delay(500).deadlineWith(new Shooting(m_shooter)).andThen(new Delay(500).deadlineWith(new ToggleBPusher(m_shooter)).andThen(new AutoBouger(m_drivetrain,-250))));
   }
 }

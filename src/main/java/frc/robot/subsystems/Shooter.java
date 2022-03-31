@@ -43,7 +43,7 @@ public class Shooter extends SubsystemBase {
     // P est necessaire
     // I est probablement utile
     // D est overkill pour un robot frc selon la documentation
-    ShooterArmController.setP(.012);
+    ShooterArmController.setP(.015);
     ShooterArmController.setI(0.0000005f);
     ShooterArmController.setD(0);
   }
@@ -69,6 +69,20 @@ public class Shooter extends SubsystemBase {
       m_pusher.set(Value.kForward);
       m_pusher_state = true;
     }
+  }
+
+  public void Pusher_Reset(){
+    SmartDashboard.putString("pstate", "forward");
+    m_pusher.set(Value.kReverse);
+  }
+
+  public void Shooter_Reset(){
+    m_pivot.restoreFactoryDefaults();
+    m_pivot.getEncoder().setPosition(0.0f);
+    ShooterArmController.setReference(0, CANSparkMax.ControlType.kPosition);
+
+    ShooterArmController = m_pivot.getPIDController();
+    ShooterArmEncoder = m_pivot.getEncoder();
   }
 
   @Override

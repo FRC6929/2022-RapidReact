@@ -36,10 +36,10 @@ public class Shooting extends CommandBase {
   @Override
   public void execute() {
     if(!RobotState.shooter_lvl){
-      m_shooter.ShooterRollerDrive(-0.5f);
+      m_shooter.ShooterRollerDrive(-0.4f);
     }
     else{
-      m_shooter.ShooterRollerDrive(-0.8f);
+      m_shooter.ShooterRollerDrive(-0.85);
     }
   }
 

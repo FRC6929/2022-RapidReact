@@ -10,4 +10,6 @@ public class RobotState {
     public static boolean bras = true; //true = stable, false = mobile
 
     public static boolean shooter_lvl = false; // false lvl 1 , true lvl 2
+
+    public static boolean comtrol_stick = true; // false manette, true joystick
 }

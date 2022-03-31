@@ -46,7 +46,7 @@ public class Shooting extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooter.Toggle_Pusher();
+    m_shooter.SetBallPusher(true);
     m_shooter.ShooterRollerDrive(0);
     m_finished = true;
   }

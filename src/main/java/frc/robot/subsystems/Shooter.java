@@ -71,6 +71,16 @@ public class Shooter extends SubsystemBase {
     }
   }
 
+  public void SetBallPusher(boolean pusher){
+    if(pusher == true)
+    {
+      m_pusher.set(Value.kForward);
+    }
+    else{
+      m_pusher.set(Value.kReverse);
+    }
+  }
+
   public void Pusher_Reset(){
     SmartDashboard.putString("pstate", "forward");
     m_pusher.set(Value.kReverse);

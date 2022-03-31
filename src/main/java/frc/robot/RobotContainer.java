@@ -55,7 +55,8 @@ public class RobotContainer {
     JoystickButton co_Next = new JoystickButton(m_Copilote, 6);
     JoystickButton co_Shoot = new JoystickButton(m_Copilote, 7);
 
-    JoystickButton jo_resetshooter = new JoystickButton(m_Joystick, 7);
+    JoystickButton jo_PushTrue = new JoystickButton(m_Joystick, 7);
+    JoystickButton jo_PushFalse = new JoystickButton(m_Joystick, 8);
 
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_drivetrain));
@@ -89,7 +90,7 @@ public class RobotContainer {
     co_Reset.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_back,true,"lvl2_arr"));
 
     co_Shoot.whenHeld(new Shooting(m_shooter));
-    co_Shoot.whenReleased(new Delay(1000).andThen(new ToggleBPusher(m_shooter)));
+    co_Shoot.whenReleased(new Delay(1000).andThen(new SetBallPusher(m_shooter, false)));
 
     // C un peu plus compliquer que ca devrait etre, donc je vais attendre de pouvoir tester
     // avant de faire en sorte que ca prenne les deux boutons
@@ -97,7 +98,8 @@ public class RobotContainer {
     co_Reset.whenPressed(new ResetState(m_elevator));
 
     //joystick reset
-    jo_resetshooter.whenPressed(new PusherReset(m_shooter));
+    jo_PushTrue.whenPressed(new SetBallPusher(m_shooter, true));
+    jo_PushFalse.whenPressed(new SetBallPusher(m_shooter, false));
   }
 
   public Command getAutonomousCommand() {

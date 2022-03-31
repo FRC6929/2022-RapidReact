@@ -5,31 +5,30 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotState;
+import frc.robot.subsystems.Shooter;
 
-public class SetBras extends CommandBase {
+public class SetBallPusher extends CommandBase {
   /** Creates a new SetMode. */
-  boolean bras;
+  Shooter m_shooter;
 
-  public SetBras(boolean bras) {
-    if(RobotState.mode == false)
-    {
-      System.out.println("Switch mode");
-      this.bras = bras;
-    }
+  boolean pusher;
+
+  public SetBallPusher(Shooter p, boolean pusher) {
+    m_shooter = p;
+    this.pusher = pusher;
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotState.bras = bras;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
+    m_shooter.SetBallPusher(pusher);
   }
 
   // Called once the command ends or is interrupted.

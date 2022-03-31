@@ -82,11 +82,11 @@ public class RobotContainer {
     co_MobileMode_Intake.whenPressed(new SetBras(false));
 
     // Shooter Positions
-    co_FixeMode_Lvl1.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_front,false)); // 1 AV
-    co_Hold_Lvl1_arr.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_back,false));
-    co_Back_Lvl2.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl2_front, true));
-    co_MobileMode_Intake.whenPressed(new ShooterPID(m_shooter,Constants.ConsShooter.p_lvl_intake,false));
-    co_Reset.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_back,true));
+    co_FixeMode_Lvl1.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_front,false,"lvl1_av")); // 1 AV
+    co_Hold_Lvl1_arr.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_back,false,"lvl1_arr"));
+    co_Back_Lvl2.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl2_front, true,"lvl2_av"));
+    co_MobileMode_Intake.whenPressed(new ShooterPID(m_shooter,Constants.ConsShooter.p_lvl_intake,false,"intake"));
+    co_Reset.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_back,true,"lvl2_arr"));
 
     co_Shoot.whenHeld(new Shooting(m_shooter));
     co_Shoot.whenReleased(new Delay(1000).andThen(new ToggleBPusher(m_shooter)));

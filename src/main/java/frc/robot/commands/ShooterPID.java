@@ -15,6 +15,7 @@ public class ShooterPID extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Shooter m_shooter;
   private boolean m_jsp;
+  private String m_hack;
   double angle;
 
   /**
@@ -22,9 +23,10 @@ public class ShooterPID extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterPID(Shooter shooter, double angle, boolean jsp) {
+  public ShooterPID(Shooter shooter, double angle, boolean jsp, String hack) {
     m_shooter = shooter;
     m_jsp = jsp;
+    m_hack = hack;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(shooter);
     this.angle = angle;
@@ -35,6 +37,7 @@ public class ShooterPID extends CommandBase {
   public void initialize() {
     RobotState.shooter_lvl = m_jsp;
     SmartDashboard.putBoolean("shooter_lvl", RobotState.shooter_lvl);
+    SmartDashboard.putString("shooter_set", m_hack);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

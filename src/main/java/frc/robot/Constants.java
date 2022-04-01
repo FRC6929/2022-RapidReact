@@ -29,9 +29,10 @@ public final class Constants {
         public static final int LeftSwitch = 1;
 
         public static final int p_lvl1_back = 0;
-        public static final int p_lvl1_front = 24;
+        public static final int p_lvl1_front = 30;
         public static final int p_lvl_intake = 80;
-        public static final int p_lvl2_front = 20;
+        public static final int p_lvl2_front = 30;
+        public static final int p_lvl2_back = 5;
 
     } 
     public static class ConsElevator {

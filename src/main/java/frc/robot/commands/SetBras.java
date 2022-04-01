@@ -9,21 +9,19 @@ import frc.robot.RobotState;
 
 public class SetBras extends CommandBase {
   /** Creates a new SetMode. */
-  boolean bras;
+  boolean m_bras;
 
   public SetBras(boolean bras) {
-    if(RobotState.mode == false)
-    {
-      System.out.println("Switch mode");
-      this.bras = bras;
-    }
+    m_bras = bras;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotState.bras = bras;
+    if(!RobotState.mode){
+      RobotState.bras = m_bras;
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.

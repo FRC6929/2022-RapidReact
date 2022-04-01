@@ -15,7 +15,7 @@ public class SetMode extends CommandBase {
 
   public SetMode(Camera c, boolean mode) {
     m_camera = c;
-     this.mode = mode;
+    this.mode = mode;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_camera);
   }

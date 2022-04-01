@@ -37,6 +37,12 @@ public class Robot extends TimedRobot {
     CameraServer.startAutomaticCapture();
     m_robotContainer = new RobotContainer();
 
+    // Autonome
+    SmartDashboard.setDefaultNumber("Auto Pre-Delay(ms)", 500);
+    SmartDashboard.setDefaultNumber("Auto Bouge-Delay(ms)", 0);
+    SmartDashboard.setDefaultNumber("Auto Distance", -175);
+    SmartDashboard.setDefaultBoolean("Niveau 2", true);
+
     // new SparkMax(Constants.ConsShooter.)
   }
 

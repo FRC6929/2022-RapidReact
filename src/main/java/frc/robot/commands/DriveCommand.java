@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import frc.robot.RobotState;
 import frc.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -13,10 +14,15 @@ public class DriveCommand extends CommandBase {
   private final Drivetrain m_drivetrain;
 
   private final Joystick m_joystick;
+  private final Joystick m_gamepad;
 
-  public DriveCommand(Joystick j, Drivetrain drivetrain) {
+  double ty;
+  double rx;
+
+  public DriveCommand(Joystick j, Joystick g, Drivetrain drivetrain) {
     m_drivetrain = drivetrain;
     m_joystick = j;
+    m_gamepad = g;
 
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_drivetrain);
@@ -29,7 +35,16 @@ public class DriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.drive(-m_joystick.getY(), -m_joystick.getX());
+    if(RobotState.control_stick){
+      m_drivetrain.drive(-m_joystick.getY(), -m_joystick.getX());
+    }
+    else{
+      rx = -m_gamepad.getRawAxis(0)*0.9;
+      ty = (m_gamepad.getRawAxis(3)-m_gamepad.getRawAxis(2))*0.8;
+
+      m_drivetrain.drive(ty, rx);
+    }
+    
   }
 
   // Called once the command ends or is interrupted.

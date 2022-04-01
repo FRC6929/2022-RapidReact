@@ -14,13 +14,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class Shooting extends CommandBase {
+public class StopShooting extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private Shooter m_shooter;
 
   private boolean m_finished = false;
   
-  public Shooting(Shooter shooter) {
+  public StopShooting(Shooter shooter) {
     m_shooter = shooter;
 
     // Use addRequirements() here to declare subsystem dependencies.
@@ -35,26 +35,20 @@ public class Shooting extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!RobotState.shooter_lvl){
-      m_shooter.ShooterRollerDrive(-0.4f);
-    }
-    else{
-      m_shooter.ShooterRollerDrive(-0.85);
-    }
+    m_shooter.ShooterRollerDrive(0);
+    m_shooter.SetBallPusher(false);
+    m_finished = true;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooter.SetBallPusher(true);
-    m_shooter.ShooterRollerDrive(0);
-    m_finished = true;
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
 

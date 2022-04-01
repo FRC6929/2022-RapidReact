@@ -9,6 +9,7 @@ import java.util.function.BooleanSupplier;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.commands.autonome.*;
 import frc.robot.subsystems.*;
@@ -29,6 +30,7 @@ public class RobotContainer {
   private final Joystick m_Joystick = new Joystick(0);
   private final Joystick m_Copilote = new Joystick(1); // Buttons copilote
   private final Joystick m_Copilote2 = new Joystick(2); // Joystick copilote
+  private final Joystick m_Gamepad = new Joystick(3);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -59,7 +61,7 @@ public class RobotContainer {
     JoystickButton jo_PushFalse = new JoystickButton(m_Joystick, 8);
 
     m_drivetrain.init_drive();
-    m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_drivetrain));
+    m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Gamepad, m_drivetrain));
 
 
     //push_arm_btn.whenPressed(new PushArm(m_pneumatics));
@@ -87,10 +89,10 @@ public class RobotContainer {
     co_Hold_Lvl1_arr.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_back,false,"lvl1_arr"));
     co_Back_Lvl2.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl2_front, true,"lvl2_av"));
     co_MobileMode_Intake.whenPressed(new ShooterPID(m_shooter,Constants.ConsShooter.p_lvl_intake,false,"intake"));
-    co_Reset.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl1_back,true,"lvl2_arr"));
+    co_Reset.whenPressed(new ShooterPID(m_shooter, Constants.ConsShooter.p_lvl2_back,true,"lvl2_arr"));
 
-    co_Shoot.whenHeld(new Shooting(m_shooter));
-    co_Shoot.whenReleased(new Delay(1000).andThen(new SetBallPusher(m_shooter, false)));
+    co_Shoot.whenPressed(new StartShooting(m_shooter));
+    co_Shoot.whenReleased(new SetBallPusher(m_shooter, true).andThen(new Delay(300).andThen(new StopShooting(m_shooter))));
 
     // C un peu plus compliquer que ca devrait etre, donc je vais attendre de pouvoir tester
     // avant de faire en sorte que ca prenne les deux boutons
@@ -105,6 +107,18 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     RobotState.shooter_lvl = false;
     m_drivetrain.reset_encoders();
-    return (new Delay(500).deadlineWith(new Shooting(m_shooter)).andThen(new Delay(500).deadlineWith(new ToggleBPusher(m_shooter)).andThen(new AutoBouger(m_drivetrain,-250))));
+    // Shoot
+    Command m_auto = new Delay(SmartDashboard.getNumber("Auto Pre-Delay(ms)", 5000));
+    RobotState.shooter_lvl = SmartDashboard.getBoolean("Niveau 2", true);
+    m_auto = m_auto.andThen(new StartShooting(m_shooter));
+    m_auto = m_auto.andThen(new Delay(1000));
+    m_auto = m_auto.andThen(new SetBallPusher(m_shooter, true));
+    m_auto = m_auto.andThen(new Delay(100));
+    m_auto = m_auto.andThen(new StopShooting(m_shooter));
+    // Bouger
+    m_auto = m_auto.andThen(new Delay(SmartDashboard.getNumber("Auto Bouge-Delay(ms)", 0)));
+    m_auto = m_auto.andThen(new AutoBouger(m_drivetrain,SmartDashboard.getNumber("Auto Distance", -175)));
+    return m_auto;
+    //return ((new Delay(500)).deadlineWith(new StartShooting(m_shooter)).andThen(new Delay(500)).deadlineWith((new SetBallPusher(m_shooter, true))).andThen(new StopShooting(m_shooter)).andThen(new SetBallPusher(m_shooter, false)).andThen(new AutoBouger(m_drivetrain,-250)));
   }
 }

@@ -78,14 +78,9 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public double get_encoder_br(){
-    //SmartDashboard.putNumber("br", m_drive_br.getEncoder().getPosition());
     return m_drive_br.getEncoder().getPosition();
   }
   public double get_encoder(){
-    //SmartDashboard.putNumber("fl", -m_drive_fl.getEncoder().getPosition());
-    //SmartDashboard.putNumber("bl", -m_drive_bl.getEncoder().getPosition());
-    //SmartDashboard.putNumber("fr", m_drive_fr.getEncoder().getPosition());
-    //SmartDashboard.putNumber("br", m_drive_br.getEncoder().getPosition());
     return (-m_drive_fl.getEncoder().getPosition()-m_drive_bl.getEncoder().getPosition()+m_drive_fr.getEncoder().getPosition()+m_drive_br.getEncoder().getPosition())/4;
   }
 

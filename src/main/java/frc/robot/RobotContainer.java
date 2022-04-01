@@ -9,6 +9,7 @@ import java.util.function.BooleanSupplier;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.commands.autonome.*;
@@ -117,7 +118,7 @@ public class RobotContainer {
     m_auto = m_auto.andThen(new StopShooting(m_shooter));
     // Bouger
     m_auto = m_auto.andThen(new Delay(SmartDashboard.getNumber("Auto Bouge-Delay(ms)", 0)));
-    m_auto = m_auto.andThen(new AutoBouger(m_drivetrain,SmartDashboard.getNumber("Auto Distance", -175)));
+    m_auto = m_auto.andThen(new AutoBouger(m_drivetrain,-(SmartDashboard.getNumber("Auto Distance(cm)", 250) )));
     return m_auto;
     //return ((new Delay(500)).deadlineWith(new StartShooting(m_shooter)).andThen(new Delay(500)).deadlineWith((new SetBallPusher(m_shooter, true))).andThen(new StopShooting(m_shooter)).andThen(new SetBallPusher(m_shooter, false)).andThen(new AutoBouger(m_drivetrain,-250)));
   }

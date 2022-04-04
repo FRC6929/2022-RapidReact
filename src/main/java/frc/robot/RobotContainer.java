@@ -61,9 +61,15 @@ public class RobotContainer {
     JoystickButton jo_PushTrue = new JoystickButton(m_Joystick, 7);
     JoystickButton jo_PushFalse = new JoystickButton(m_Joystick, 8);
 
+    JoystickButton gp_Fast = new JoystickButton(m_Gamepad, 1);
+    JoystickButton gp_Slow = new JoystickButton(m_Gamepad, 2);
+
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Gamepad, m_drivetrain));
 
+    //Set speed for gamepad
+    gp_Fast.whenPressed(new FastRobot(true));
+    gp_Slow.whenPressed(new FastRobot(false));
 
     //push_arm_btn.whenPressed(new PushArm(m_pneumatics));
 
@@ -108,6 +114,7 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     RobotState.shooter_lvl = false;
+    RobotState.mode = true;
     m_drivetrain.reset_encoders();
     // Shoot
     Command m_auto = new Delay(SmartDashboard.getNumber("Auto Pre-Delay(ms)", 5000));

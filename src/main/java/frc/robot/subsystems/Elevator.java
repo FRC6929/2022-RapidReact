@@ -127,6 +127,7 @@ public class Elevator extends SubsystemBase {
 
     SmartDashboard.putNumber("Etat", state_id);
 
+    /*
     SmartDashboard.putNumber("lf_target", lf_target);
     SmartDashboard.putNumber("lm_target", lm_target);
     SmartDashboard.putNumber("rf_target", rf_target);
@@ -136,6 +137,7 @@ public class Elevator extends SubsystemBase {
     SmartDashboard.putNumber("lm", m_elevator_lm.getEncoder().getPosition());
     SmartDashboard.putNumber("rf", m_elevator_rf.getEncoder().getPosition());
     SmartDashboard.putNumber("rm", m_elevator_rm.getEncoder().getPosition());
+    */
 
     //"Machine à état"
     //(pas vrm une vrai machine à état mais vous savez mm pas c quoi faq c correcte)

@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.RobotState;
 import frc.robot.subsystems.Drivetrain;
 
@@ -43,10 +44,16 @@ public class DriveCommand extends CommandBase {
       m_drivetrain.drive(ty*mult, rx*mult);
     }
     else{
-      rx = -m_gamepad.getRawAxis(0)*0.9;
-      ty = (m_gamepad.getRawAxis(3)-m_gamepad.getRawAxis(2))*0.8;
+      if(RobotState.fast = true){
+        mult = Constants.ConsDrivetrain.fastSpeed;
+      }
+      else{
+        mult = Constants.ConsDrivetrain.slowSpeed;
+      }
+      rx = -m_gamepad.getRawAxis(0);
+      ty = (m_gamepad.getRawAxis(3)-m_gamepad.getRawAxis(2))*0.9;
 
-      m_drivetrain.drive(ty, rx);
+      m_drivetrain.drive(ty*mult, rx*mult);
     }
     
   }

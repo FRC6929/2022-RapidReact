@@ -41,8 +41,9 @@ public class Elevator extends SubsystemBase {
   private boolean trigger_pstate = false;
 
   private boolean goto_target = false;
-
   private boolean p_target = false;
+
+  private boolean manual_override = false;
 
   // États
   // 0 : État initiale
@@ -80,11 +81,13 @@ public class Elevator extends SubsystemBase {
   }
 
   public void StableDrive(Double speed) {
+    manual_override = true;
     m_elevator_lf.set(speed);
     m_elevator_rf.set(-speed);
   }
 
   public void MobileDrive(Double speed) {
+    manual_override = true;
     m_elevator_lm.set(-speed);
     m_elevator_rm.set(speed);
   }
@@ -94,10 +97,13 @@ public class Elevator extends SubsystemBase {
   }
 
   public void Toggle_Arm(){
+    manual_override = true;
     if(this.m_arm_state){
+      p_target = false;
       Set_Arm(false);
     }
     else{
+      p_target = true;
       Set_Arm(true);
     }
   }
@@ -152,6 +158,8 @@ public class Elevator extends SubsystemBase {
 
       p_target = false;
 
+      manual_override = false;
+
       state_id = 0;
     }
     
@@ -192,8 +200,8 @@ public class Elevator extends SubsystemBase {
     }
     else if(state_id == 7){
       trigger_tstate = false;
-      lf_target = Constants.ConsElevator.lf_length/3;
-      rf_target = Constants.ConsElevator.rf_length/3;
+      lf_target = Constants.ConsElevator.lf_length/2;
+      rf_target = Constants.ConsElevator.rf_length/2;
       lm_target = 0;
       rm_target = 0;
     }
@@ -226,6 +234,7 @@ public class Elevator extends SubsystemBase {
 
     // Mouvements
     // Goto targets
+    if(!manual_override){
     int verified = 0;
     if(goto_target){
       // lf 
@@ -316,9 +325,12 @@ public class Elevator extends SubsystemBase {
         SmartDashboard.putNumber("Verified", verified);
       }
     }
+    }
 
-    if(p_target != m_arm_state){
-      Set_Arm(p_target);
+    if(!manual_override){
+      if(p_target != m_arm_state){
+        Set_Arm(p_target);
+      }
     }
   }
 }

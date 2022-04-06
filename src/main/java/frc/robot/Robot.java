@@ -58,7 +58,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     // Fait sure de toujours savoir c quoi le mode du robot
-    SmartDashboard.putBoolean("Rapide", RobotState.fast);
     if(RobotState.mode){
       SmartDashboard.putString("Mode", "Shooter");
     }

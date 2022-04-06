@@ -9,15 +9,17 @@ import frc.robot.RobotState;
 
 public class FastRobot extends CommandBase {
 
+  boolean fast;
   /** Creates a new FastRobot. */
-  public FastRobot() {
+  public FastRobot(boolean fast) {
+    this.fast = fast;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotState.fast = true;
+    RobotState.fast = fast;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -31,6 +33,6 @@ public class FastRobot extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

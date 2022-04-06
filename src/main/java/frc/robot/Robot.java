@@ -38,6 +38,8 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     CameraServer.startAutomaticCapture();
     m_robotContainer = new RobotContainer();
+    
+    SmartDashboard.setDefaultBoolean("Joystick", true);
 
     // Autonome
     SmartDashboard.setDefaultNumber("Auto Pre-Delay(ms)", 500);
@@ -113,6 +115,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    RobotState.control_stick = SmartDashboard.getBoolean("Joystick", true);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

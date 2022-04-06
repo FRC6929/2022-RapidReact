@@ -7,17 +7,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotState;
 
-public class FastRobot extends CommandBase {
+public class SlowRobot extends CommandBase {
 
   /** Creates a new FastRobot. */
-  public FastRobot() {
+  public SlowRobot() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotState.fast = true;
+    RobotState.fast = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

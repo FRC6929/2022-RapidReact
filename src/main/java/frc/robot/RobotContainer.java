@@ -67,9 +67,16 @@ public class RobotContainer {
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Gamepad, m_drivetrain));
 
+    if(RobotState.control_stick){
+      SmartDashboard.putString("ControlType", "Joystick");
+    }
+    else{
+      SmartDashboard.putString("ControlType", "Manette");
+    }
+
     //Set speed for gamepad
-    gp_Fast.whenPressed(new FastRobot(true));
-    gp_Slow.whenPressed(new FastRobot(false));
+    gp_Fast.whenPressed(new FastRobot());
+    gp_Slow.whenPressed(new SlowRobot());
 
     //push_arm_btn.whenPressed(new PushArm(m_pneumatics));
 

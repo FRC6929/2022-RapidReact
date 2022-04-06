@@ -5,17 +5,12 @@
 package frc.robot.commands.autonome;
 
 import frc.robot.subsystems.Shooter;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class AutoRoller extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Shooter m_shooter;
-
-  private int temps;
-
-  private double encodeur_start = 0;
 
   public boolean fin;
 

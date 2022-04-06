@@ -3,7 +3,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotState;
 import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Shooter;
 
 // Honnetement je sait pas c'est censer etre quoi
 // faq jai inventer ce incroyable nom

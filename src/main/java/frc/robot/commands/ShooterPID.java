@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import frc.robot.Robot;
 import frc.robot.RobotState;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

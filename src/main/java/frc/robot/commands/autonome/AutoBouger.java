@@ -5,15 +5,12 @@
 package frc.robot.commands.autonome;
 
 import frc.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class AutoBouger extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final Drivetrain m_drivetrain;
-
-  private int temps;
 
   private double encodeur_start = 0;
 
@@ -37,7 +34,6 @@ public class AutoBouger extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    temps = 0;
     encodeur_start = m_drivetrain.get_encoder();
 
     if(this.dist > 0){
@@ -60,8 +56,6 @@ public class AutoBouger extends CommandBase {
     if(Math.abs(m_drivetrain.get_encoder() - encodeur_start) >= Math.abs(dist*0.16666666666666666666666666666667f)){
       end(true);
     }
-
-    temps++;
 
     // Devrait continuer
     // this.schedule();

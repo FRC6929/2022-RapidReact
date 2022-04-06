@@ -4,13 +4,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Elevator extends SubsystemBase {
@@ -18,11 +15,6 @@ public class Elevator extends SubsystemBase {
   private final CANSparkMax m_elevator_lm = new CANSparkMax(Constants.ConsElevator.EMoteur2, MotorType.kBrushless);
   private final CANSparkMax m_elevator_rf = new CANSparkMax(Constants.ConsElevator.EMoteur3, MotorType.kBrushless);
   private final CANSparkMax m_elevator_rm = new CANSparkMax(Constants.ConsElevator.EMoteur4, MotorType.kBrushless);
-
-  private SparkMaxPIDController EArmController_lf;
-  private SparkMaxPIDController EArmController_lm;
-  private SparkMaxPIDController EArmController_rf;
-  private SparkMaxPIDController EArmController_rm;
 
   private DoubleSolenoid m_arm = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.pneumatic.arm1.port1, Constants.pneumatic.arm1.port2);
   private boolean m_arm_state = false;
@@ -37,8 +29,6 @@ public class Elevator extends SubsystemBase {
 
   // Atteint target
   private boolean trigger_tstate = false;
-  // Change pneumatique
-  private boolean trigger_pstate = false;
 
   private boolean goto_target = false;
   private boolean p_target = false;
@@ -60,10 +50,6 @@ public class Elevator extends SubsystemBase {
   // 11 : Monter bras fixe
   
   public int state_id = 0;
-
-  private AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
-
-  private static final int kGyroPort = 0;
 
   public Elevator() {
     reset_encoders();
@@ -156,7 +142,6 @@ public class Elevator extends SubsystemBase {
 
       goto_target = false;
       trigger_tstate = false;
-      trigger_pstate = false;
 
       p_target = false;
 

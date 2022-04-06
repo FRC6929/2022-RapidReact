@@ -9,7 +9,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -28,8 +27,6 @@ public class Drivetrain extends SubsystemBase {
   private final DifferentialDrive m_DifferentialDrive = new DifferentialDrive(m_leftFollower, m_rightFollower);
 
   private AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
-
-  private static final int kGyroPort = 0;
 
   /** Creates a new drivetrain. */
   public Drivetrain() {

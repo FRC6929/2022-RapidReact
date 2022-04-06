@@ -5,7 +5,6 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -21,7 +20,6 @@ public class Shooter extends SubsystemBase {
   private final CANSparkMax m_shooter1 = new CANSparkMax(Constants.ConsShooter.Moteur1, MotorType.kBrushless);
   private final CANSparkMax m_shooter2 = new CANSparkMax(Constants.ConsShooter.Moteur2, MotorType.kBrushless);
   private CANSparkMax m_pivot = new CANSparkMax(Constants.ConsShooter.Moteur3, MotorType.kBrushless);
-  private RelativeEncoder ShooterArmEncoder;
   private SparkMaxPIDController ShooterArmController;
   private final DigitalInput limit = new DigitalInput(1);
 
@@ -35,7 +33,6 @@ public class Shooter extends SubsystemBase {
     m_pivot.getEncoder().setPosition(0.0f);
 
     ShooterArmController = m_pivot.getPIDController();
-    ShooterArmEncoder = m_pivot.getEncoder();
 
     m_pusher.set(Value.kReverse);
 
@@ -92,7 +89,6 @@ public class Shooter extends SubsystemBase {
     ShooterArmController.setReference(0, CANSparkMax.ControlType.kPosition);
 
     ShooterArmController = m_pivot.getPIDController();
-    ShooterArmEncoder = m_pivot.getEncoder();
   }
 
   @Override

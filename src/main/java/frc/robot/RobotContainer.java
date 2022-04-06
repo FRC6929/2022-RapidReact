@@ -4,18 +4,12 @@
 
 package frc.robot;
 
-import java.util.function.BooleanSupplier;
-
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
 import frc.robot.commands.autonome.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
@@ -24,7 +18,6 @@ public class RobotContainer {
   public final Camera m_camera = new Camera();
   // The robot's subsystems and commands are defined here...
   //private final AutoBouger m_autoBouger = new AutoBouger(m_drivetrain);
-  private final AutoTourner m_autoTourner = new AutoTourner(m_drivetrain);
 
   private final Shooter m_shooter = new Shooter();
 

@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import java.util.function.BooleanSupplier;
-
 public class RobotState {
     public static boolean mode = true; //true = shooter, false = elevateur
     public static boolean bras = true; //true = stable, false = mobile

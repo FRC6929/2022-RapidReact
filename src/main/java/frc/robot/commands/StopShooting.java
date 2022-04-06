@@ -4,21 +4,14 @@
 
 package frc.robot.commands;
 
-import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotState;
 import frc.robot.subsystems.Shooter;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class StopShooting extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private Shooter m_shooter;
-
-  private boolean m_finished = false;
   
   public StopShooting(Shooter shooter) {
     m_shooter = shooter;
@@ -39,7 +32,6 @@ public class StopShooting extends CommandBase {
       m_shooter.ShooterRollerDrive(0);
       m_shooter.SetBallPusher(false);
     }
-    m_finished = true;
   }
 
   // Called once the command ends or is interrupted.

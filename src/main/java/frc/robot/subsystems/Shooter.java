@@ -54,7 +54,7 @@ public class Shooter extends SubsystemBase {
 
   public void ShooterArmPID(double angle) {
     //double rotation = (angle*5*5*5*2)/360;
-    //SmartDashboard.putNumber("PID Rotation", angle);
+    SmartDashboard.putNumber("PID Rotation", angle);
     ShooterArmController.setReference(angle, CANSparkMax.ControlType.kPosition);
   }
 
@@ -99,7 +99,7 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     //SmartDashboard.putBoolean("switch", getSwitch());
 
-    //SmartDashboard.putNumber("Pivot Positon", m_pivot.getEncoder().getPosition());
+    SmartDashboard.putNumber("Pivot Positon", m_pivot.getEncoder().getPosition());
     //SmartDashboard.putNumber("",);
     // This method will be called once per scheduler run
   }

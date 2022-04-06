@@ -35,10 +35,8 @@ public class StopShooting extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotState.mode){
-      m_shooter.ShooterRollerDrive(0);
-      m_shooter.SetBallPusher(false);
-    }
+    m_shooter.ShooterRollerDrive(0);
+    m_shooter.SetBallPusher(false);
     m_finished = true;
   }
 

@@ -41,9 +41,8 @@ public class Elevator extends SubsystemBase {
   private boolean trigger_pstate = false;
 
   private boolean goto_target = false;
-  private boolean p_target = false;
 
-  private boolean manual_override = false;
+  private boolean p_target = false;
 
   // États
   // 0 : État initiale
@@ -81,13 +80,11 @@ public class Elevator extends SubsystemBase {
   }
 
   public void StableDrive(Double speed) {
-    manual_override = true;
     m_elevator_lf.set(speed);
     m_elevator_rf.set(-speed);
   }
 
   public void MobileDrive(Double speed) {
-    manual_override = true;
     m_elevator_lm.set(-speed);
     m_elevator_rm.set(speed);
   }
@@ -97,13 +94,10 @@ public class Elevator extends SubsystemBase {
   }
 
   public void Toggle_Arm(){
-    manual_override = true;
     if(this.m_arm_state){
-      p_target = false;
       Set_Arm(false);
     }
     else{
-      p_target = true;
       Set_Arm(true);
     }
   }
@@ -127,7 +121,6 @@ public class Elevator extends SubsystemBase {
 
     SmartDashboard.putNumber("Etat", state_id);
 
-    /*
     SmartDashboard.putNumber("lf_target", lf_target);
     SmartDashboard.putNumber("lm_target", lm_target);
     SmartDashboard.putNumber("rf_target", rf_target);
@@ -137,7 +130,6 @@ public class Elevator extends SubsystemBase {
     SmartDashboard.putNumber("lm", m_elevator_lm.getEncoder().getPosition());
     SmartDashboard.putNumber("rf", m_elevator_rf.getEncoder().getPosition());
     SmartDashboard.putNumber("rm", m_elevator_rm.getEncoder().getPosition());
-    */
 
     //"Machine à état"
     //(pas vrm une vrai machine à état mais vous savez mm pas c quoi faq c correcte)
@@ -159,8 +151,6 @@ public class Elevator extends SubsystemBase {
       trigger_pstate = false;
 
       p_target = false;
-
-      manual_override = false;
 
       state_id = 0;
     }
@@ -202,8 +192,8 @@ public class Elevator extends SubsystemBase {
     }
     else if(state_id == 7){
       trigger_tstate = false;
-      lf_target = Constants.ConsElevator.lf_length/2;
-      rf_target = Constants.ConsElevator.rf_length/2;
+      lf_target = Constants.ConsElevator.lf_length/3;
+      rf_target = Constants.ConsElevator.rf_length/3;
       lm_target = 0;
       rm_target = 0;
     }
@@ -236,7 +226,6 @@ public class Elevator extends SubsystemBase {
 
     // Mouvements
     // Goto targets
-    if(!manual_override){
     int verified = 0;
     if(goto_target){
       // lf 
@@ -327,12 +316,9 @@ public class Elevator extends SubsystemBase {
         SmartDashboard.putNumber("Verified", verified);
       }
     }
-    }
 
-    if(!manual_override){
-      if(p_target != m_arm_state){
-        Set_Arm(p_target);
-      }
+    if(p_target != m_arm_state){
+      Set_Arm(p_target);
     }
   }
 }

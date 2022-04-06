@@ -5,7 +5,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotState;
 import frc.robot.subsystems.Shooter;
 
 public class SetBallPusher extends CommandBase {
@@ -29,9 +28,7 @@ public class SetBallPusher extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotState.mode){
-      m_shooter.SetBallPusher(pusher);
-    }
+    m_shooter.SetBallPusher(pusher);
   }
 
   // Called once the command ends or is interrupted.

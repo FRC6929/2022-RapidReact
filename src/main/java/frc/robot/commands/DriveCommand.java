@@ -51,7 +51,7 @@ public class DriveCommand extends CommandBase {
         mult = Constants.ConsDrivetrain.slowSpeed;
       }
       rx = -m_gamepad.getRawAxis(0);
-      ty = (m_gamepad.getRawAxis(3)-m_gamepad.getRawAxis(2))*0.9;
+      ty = (m_gamepad.getRawAxis(2)-m_gamepad.getRawAxis(3))*0.9;
 
       m_drivetrain.drive(ty*mult, rx*mult);
     }

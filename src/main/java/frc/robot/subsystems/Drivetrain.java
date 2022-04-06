@@ -39,8 +39,8 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("drivetrain speed", get_speed());
-    SmartDashboard.putNumber("drivetrain encoder", get_encoder());
+    //SmartDashboard.putNumber("drivetrain speed", get_speed());
+    //SmartDashboard.putNumber("drivetrain encoder", get_encoder());
     //SmartDashboard.putNumber("gyro angle", m_ahrs.getPitch());
     // This method will be called once per scheduler run
   }

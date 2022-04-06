@@ -6,32 +6,37 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotState;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Elevator;
 
-public class SetBallPusher extends CommandBase {
-  /** Creates a new SetMode. */
-  Shooter m_shooter;
-
-  boolean pusher;
-
-  public SetBallPusher(Shooter p, boolean pusher) {
-    m_shooter = p;
-    this.pusher = pusher;
+public class BackState extends CommandBase {
+  private Elevator m_elevator;
+  private long last_switch = 0;
+  /** Creates a new BackState. */
+  public BackState(Elevator e) {
+    m_elevator = e;
+    addRequirements(e);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    last_switch = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotState.mode){
-      m_shooter.SetBallPusher(pusher);
-    }
+    if(!RobotState.mode){
+      if(System.currentTimeMillis() > last_switch +  + 1000){
+          System.out.println("Next elevator state");
+          m_elevator.state_id--;
+          last_switch = System.currentTimeMillis();
+      }
+      else{
+          System.out.println("Switch trop rapide");
+      }
+  }
   }
 
   // Called once the command ends or is interrupted.

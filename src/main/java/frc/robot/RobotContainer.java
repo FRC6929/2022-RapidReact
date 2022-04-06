@@ -67,16 +67,9 @@ public class RobotContainer {
     m_drivetrain.init_drive();
     m_drivetrain.setDefaultCommand(new DriveCommand(m_Joystick, m_Gamepad, m_drivetrain));
 
-    if(RobotState.control_stick){
-      SmartDashboard.putString("ControlType", "Joystick");
-    }
-    else{
-      SmartDashboard.putString("ControlType", "Manette");
-    }
-
     //Set speed for gamepad
-    gp_Fast.whenPressed(new FastRobot());
-    gp_Slow.whenPressed(new SlowRobot());
+    gp_Fast.whenPressed(new FastRobot(true));
+    gp_Slow.whenPressed(new FastRobot(false));
 
     //push_arm_btn.whenPressed(new PushArm(m_pneumatics));
 
@@ -112,6 +105,7 @@ public class RobotContainer {
     // avant de faire en sorte que ca prenne les deux boutons
     co_Next.whenPressed(new NextState(m_elevator));
     co_Reset.whenPressed(new ResetState(m_elevator));
+    co_Back_Lvl2.whenPressed(new BackState(m_elevator));
 
     //joystick reset
     jo_PushTrue.whenPressed(new SetBallPusher(m_shooter, true));

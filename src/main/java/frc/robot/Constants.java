@@ -18,6 +18,9 @@ public final class Constants {
         public static final int MoteurDroitAvant = 2;
         public static final int MoteurGauche = 3;
         public static final int MoteurDroit = 4;
+
+        public static double fastSpeed = 1;
+        public static double slowSpeed = 0.6;
         
     } 
     public static class ConsShooter {

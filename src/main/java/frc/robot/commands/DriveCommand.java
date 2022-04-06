@@ -19,6 +19,7 @@ public class DriveCommand extends CommandBase {
 
   double ty;
   double rx;
+  double mult;
 
   public DriveCommand(Joystick j, Joystick g, Drivetrain drivetrain) {
     m_drivetrain = drivetrain;
@@ -37,17 +38,20 @@ public class DriveCommand extends CommandBase {
   @Override
   public void execute() {
     if(RobotState.control_stick){
-      m_drivetrain.drive(-m_joystick.getY(), -m_joystick.getX());
+      mult = (-m_joystick.getRawAxis(3)*0.2)+0.8;
+      ty = -m_joystick.getY();
+      rx = -m_joystick.getX();
+      m_drivetrain.drive(ty*mult, rx*mult);
     }
     else{
-      if(RobotState.fast == true){
+      if(RobotState.fast = true){
         mult = Constants.ConsDrivetrain.fastSpeed;
       }
       else{
         mult = Constants.ConsDrivetrain.slowSpeed;
       }
       rx = -m_gamepad.getRawAxis(0);
-      ty = (m_gamepad.getRawAxis(2)-m_gamepad.getRawAxis(3))*0.9;
+      ty = (m_gamepad.getRawAxis(3)-m_gamepad.getRawAxis(2))*0.9;
 
       m_drivetrain.drive(ty*mult, rx*mult);
     }

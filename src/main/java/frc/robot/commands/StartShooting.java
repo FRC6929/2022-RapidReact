@@ -36,11 +36,13 @@ public class StartShooting extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(!RobotState.shooter_lvl){
-      m_shooter.ShooterRollerDrive(-0.35);
-    }
-    else{
-      m_shooter.ShooterRollerDrive(-0.8);
+    if(RobotState.mode){
+      if(!RobotState.shooter_lvl){
+        m_shooter.ShooterRollerDrive(-0.35);
+      }
+      else{
+        m_shooter.ShooterRollerDrive(-0.8);
+      }
     }
     m_finished = true;
   }
